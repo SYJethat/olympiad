@@ -18,7 +18,7 @@ export default function WhyAttemptSection() {
             🌟 Ancient Wisdom. Modern Edge.
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-zinc-900 dark:text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-zinc-900 ">
             Why Attempt the <span className="text-[#007799]">Sanskrit Olympiad</span>?
           </h2>
 
@@ -31,48 +31,48 @@ export default function WhyAttemptSection() {
         {/* Animated Image Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
 
-          {/* Left Card - Slides in from LEFT */}
+          {/* Left Card - Slides in from RIGHT-TO-LEFT */}
           <motion.div
-            initial={{ opacity: 0, x: -80 }}
+            initial={{ opacity: 0, x: 120 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="group bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-xl border border-zinc-100 dark:border-zinc-800 hover:shadow-2xl transition-all duration-500"
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="group   overflow-hidden  transition-all duration-500"
           >
             <div className="relative overflow-hidden">
               <img
                 src="/img/why_so_left.png"
                 alt="Benefits of Sanskrit Olympiad"
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" /> */}
 
-              <div className="absolute bottom-8 left-8 right-8 text-white">
+              <div className="absolute bottom-8 left-32  ">
                 <h3 className="text-2xl font-semibold mb-2">Key Benefits</h3>
-                <p className="text-white/90 text-sm font-medium">Memory • Logic • Analytical Thinking</p>
+                <p className="text-zinc-900 dark:text-zinc-200/90 text-sm font-medium">Memory • Logic • Analytical Thinking</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Card - Slides in from RIGHT */}
+          {/* Right Card - Slides in from RIGHT-TO-LEFT, staggered next in line */}
           <motion.div
-            initial={{ opacity: 0, x: 80 }}
+            initial={{ opacity: 0, x: 120 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="group bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-xl border border-zinc-100 dark:border-zinc-800 hover:shadow-2xl transition-all duration-500"
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="group "
           >
             <div className="relative overflow-hidden">
               <img
                 src="/img/why_so_right.png"
                 alt="Sanskrit Olympiad syllabus and benchmarks"
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-auto object-cover "
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" /> */}
 
-              <div className="absolute bottom-8 left-8 right-8 text-white">
+              <div className="absolute bottom-8 left-8 right-8 ">
                 <h3 className="text-2xl font-semibold mb-2">Syllabus Excellence</h3>
-                <p className="text-white/90 text-sm font-medium">Structured levels with global benchmarks</p>
+                <p className="text-zinc-900 dark:text-zinc-200/90 text-sm font-medium">Structured levels with global benchmarks</p>
               </div>
             </div>
           </motion.div>

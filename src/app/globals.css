@@ -32,10 +32,10 @@
 }
 
 .dark {
-  --background: #0f0714;
-  --foreground: #f5f2f7;
-  --card-bg: rgba(31, 18, 39, 0.7);
-  --border-color: rgba(253, 242, 41, 0.2);
+  --background: #fafafb;
+  --foreground: #1c0d24;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(156, 42, 115, 0.12);
 }
 
 body {

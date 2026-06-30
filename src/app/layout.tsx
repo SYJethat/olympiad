@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-50 font-sans transition-colors duration-300">
+      <body className="min-h-full flex flex-col bg-[#fafafb] text-slate-900 font-sans transition-colors duration-300">
         <Navbar />
         {/* Main Content wrapper */}
         <div className="flex-1 flex flex-col">

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
   {
@@ -26,40 +27,67 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="py-20 px-6 bg-background border-t border-zinc-200/50 dark:border-zinc-900">
+    <section className="py-20 px-6 bg-white border-t border-zinc-200/50 select-none">
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="text-center space-y-3 mb-16">
+        
+        {/* Header Block */}
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center space-y-3 mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-[#007799]/10 text-[#007799] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <HelpCircle size={13} /> Support Center
+          </div>
           <h2 className="text-2xl md:text-3xl font-extrabold font-display text-[#007799]">
             Frequently Asked Questions
           </h2>
-          <p className="text-[#007799] max-w-xl mx-auto text-xs font-bold">
+          <p className="text-zinc-500 max-w-xl mx-auto text-xs font-semibold">
             Check here for details regarding eligibility, exam platforms, and medal criteria.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Accordion list */}
+        {/* Accordions */}
         <div className="space-y-4">
-          {FAQS.map((faq, idx) => (
-            <div 
-              key={idx}
-              className="rounded-xl bg-white dark:bg-zinc-900 overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 shadow-sm transition-all duration-300"
-            >
-              <button
-                onClick={() => toggleFaq(idx)}
-                className="w-full flex justify-between items-center p-5 text-left font-extrabold text-xs md:text-sm text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer transition-colors"
+          {FAQS.map((faq, idx) => {
+            const isOpen = !!faqOpen[idx];
+            return (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05, duration: 0.4 }}
+                className="rounded-xl bg-white overflow-hidden border border-zinc-200/60 shadow-sm transition-all duration-300"
               >
-                <span className="font-display pr-4">{faq.q}</span>
-                <ChevronDown className={`h-4 w-4 transform transition-transform duration-300 ${faqOpen[idx] ? "rotate-180 text-[#007799]" : "text-zinc-400"}`} />
-              </button>
-              
-              {faqOpen[idx] && (
-                <div className="px-5 pb-5 pt-1 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-850 font-semibold">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
+                <button
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full flex justify-between items-center p-5 text-left font-extrabold text-xs md:text-sm text-zinc-800 hover:bg-zinc-50/50 cursor-pointer transition-colors"
+                >
+                  <span className="font-display pr-4">{faq.q}</span>
+                  <ChevronDown className={`h-4.5 w-4.5 transform transition-transform duration-300 ${isOpen ? "rotate-180 text-[#007799]" : "text-zinc-400"}`} />
+                </button>
+                
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 pt-1 text-xs text-zinc-650 leading-relaxed border-t border-zinc-100 font-semibold text-left">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
