@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "NEET Biology Full Mock Test 1",
+    "subject": "Biology",
+    "questions": 90,
+    "duration": "90 Minutes",
+    "difficulty": "Hard",
+    "type": "National Prep"
+  },
+  {
+    "id": 2,
+    "title": "JEE Main Physics Practice Test",
+    "subject": "Physics",
+    "questions": 30,
+    "duration": "60 Minutes",
+    "difficulty": "Hard",
+    "type": "Engineering Prep"
+  },
+  {
+    "id": 3,
+    "title": "Algebra Foundations Practice Test",
+    "subject": "Mathematics",
+    "questions": 25,
+    "duration": "45 Minutes",
+    "difficulty": "Medium",
+    "type": "Chapter Wise"
+  },
+  {
+    "id": 4,
+    "title": "Chemical Bonding Mock Exam",
+    "subject": "Chemistry",
+    "questions": 20,
+    "duration": "40 Minutes",
+    "difficulty": "Medium",
+    "type": "Chapter Wise"
+  },
+  {
+    "id": 5,
+    "title": "English Grammar Tenses Challenge",
+    "subject": "English",
+    "questions": 40,
+    "duration": "30 Minutes",
+    "difficulty": "Easy",
+    "type": "Weekly Quiz"
+  },
+  {
+    "id": 6,
+    "title": "Social Studies Map Practice",
+    "subject": "Social Studies",
+    "questions": 15,
+    "duration": "20 Minutes",
+    "difficulty": "Easy",
+    "type": "Weekly Quiz"
+  }
+]

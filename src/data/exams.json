@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Mathematics Board Prep Exam",
+    "class": 10,
+    "subject": "Mathematics",
+    "difficulty": "Hard",
+    "duration": "90 Minutes",
+    "questions": 40,
+    "image": "math"
+  },
+  {
+    "id": 2,
+    "title": "Physics Mechanics Chapter Test",
+    "class": 11,
+    "subject": "Physics",
+    "difficulty": "Medium",
+    "duration": "45 Minutes",
+    "questions": 25,
+    "image": "physics"
+  },
+  {
+    "id": 3,
+    "title": "Organic Chemistry Fundamentals",
+    "class": 12,
+    "subject": "Chemistry",
+    "difficulty": "Hard",
+    "duration": "60 Minutes",
+    "questions": 30,
+    "image": "chemistry"
+  },
+  {
+    "id": 4,
+    "title": "Genetics & Evolution Quiz",
+    "class": 12,
+    "subject": "Biology",
+    "difficulty": "Easy",
+    "duration": "30 Minutes",
+    "questions": 20,
+    "image": "biology"
+  },
+  {
+    "id": 5,
+    "title": "English Grammar & Comprehension",
+    "class": 8,
+    "subject": "English",
+    "difficulty": "Easy",
+    "duration": "40 Minutes",
+    "questions": 30,
+    "image": "english"
+  },
+  {
+    "id": 6,
+    "title": "Basic Environmental Sciences",
+    "class": 5,
+    "subject": "Environmental Studies",
+    "difficulty": "Easy",
+    "duration": "30 Minutes",
+    "questions": 20,
+    "image": "evs"
+  },
+  {
+    "id": 7,
+    "title": "Linear Algebra Mastery Exam",
+    "class": 12,
+    "subject": "Mathematics",
+    "difficulty": "Hard",
+    "duration": "90 Minutes",
+    "questions": 50,
+    "image": "math"
+  },
+  {
+    "id": 8,
+    "title": "Ancient History & Empires Study Test",
+    "class": 9,
+    "subject": "History & Civics",
+    "difficulty": "Medium",
+    "duration": "50 Minutes",
+    "questions": 35,
+    "image": "history"
+  }
+]

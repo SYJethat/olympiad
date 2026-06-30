@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "How do I start a mock exam?",
+    "answer": "Navigate to the 'Exams' or 'Mock Tests' tab, select your preferred subject filter, click on the exam details card, and hit the 'Attempt Exam' button to start the live timer portal.",
+    "category": "General"
+  },
+  {
+    "id": 2,
+    "question": "Is the study material downloadable as PDF?",
+    "answer": "Yes! All cheatsheets, formula guides, and board revision notes listed under the 'Study Materials' tab contain instant direct download buttons.",
+    "category": "Resources"
+  },
+  {
+    "id": 3,
+    "question": "How does the performance chart track my progress?",
+    "answer": "Our automated profile dashboard records your mock test attempts, scores, and completion speeds to construct dynamic visual progress charts showing subject strengths.",
+    "category": "Dashboard"
+  },
+  {
+    "id": 4,
+    "question": "Are the study tracks aligned with the school curriculum?",
+    "answer": "Absolutely. All categories from Class 1 to Class 12 cover national boards syllabus standards for core subjects including Science, EVS, History, Math, and English.",
+    "category": "Curriculum"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Aryan Sharma",
+    "role": "Grade 10 Student",
+    "text": "The chapter-wise mock tests on Smart Exam Hub helped me secure 98% in my Mathematics board exams! The explanation notes are incredibly clear and quick to review.",
+    "rating": 5,
+    "avatar": "student1"
+  },
+  {
+    "id": 2,
+    "name": "Riya Iyer",
+    "role": "Grade 12 Science Major",
+    "text": "Framer Motion animations make using the platform so satisfying, and the SVG performance tracker dashboard helped me see my weak areas in Physics instantly.",
+    "rating": 5,
+    "avatar": "student2"
+  },
+  {
+    "id": 3,
+    "name": "David Miller",
+    "role": "Parent of Class 4 Student",
+    "text": "As a parent, I love the simple class filtering and visual statistics. My child looks forward to collecting achievement badges for completing English quizzes.",
+    "rating": 5,
+    "avatar": "parent"
+  }
+]

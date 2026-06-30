@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Class 1",
+    "subjects": ["Mathematics", "English", "Environmental Studies"],
+    "notesCount": 12,
+    "practicePapersCount": 8,
+    "mockTestsCount": 5,
+    "videoLecturesCount": 15
+  },
+  {
+    "id": 2,
+    "name": "Class 2",
+    "subjects": ["Mathematics", "English", "Environmental Studies"],
+    "notesCount": 14,
+    "practicePapersCount": 9,
+    "mockTestsCount": 6,
+    "videoLecturesCount": 18
+  },
+  {
+    "id": 3,
+    "name": "Class 3",
+    "subjects": ["Mathematics", "Science", "English", "Social Studies"],
+    "notesCount": 18,
+    "practicePapersCount": 10,
+    "mockTestsCount": 8,
+    "videoLecturesCount": 20
+  },
+  {
+    "id": 4,
+    "name": "Class 4",
+    "subjects": ["Mathematics", "Science", "English", "Social Studies"],
+    "notesCount": 20,
+    "practicePapersCount": 12,
+    "mockTestsCount": 10,
+    "videoLecturesCount": 22
+  },
+  {
+    "id": 5,
+    "name": "Class 5",
+    "subjects": ["Mathematics", "Science", "English", "Social Studies"],
+    "notesCount": 24,
+    "practicePapersCount": 15,
+    "mockTestsCount": 12,
+    "videoLecturesCount": 25
+  },
+  {
+    "id": 6,
+    "name": "Class 6",
+    "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Geography", "History"],
+    "notesCount": 30,
+    "practicePapersCount": 18,
+    "mockTestsCount": 15,
+    "videoLecturesCount": 30
+  },
+  {
+    "id": 7,
+    "name": "Class 7",
+    "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Geography", "History"],
+    "notesCount": 32,
+    "practicePapersCount": 20,
+    "mockTestsCount": 16,
+    "videoLecturesCount": 35
+  },
+  {
+    "id": 8,
+    "name": "Class 8",
+    "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Geography", "History", "Civics"],
+    "notesCount": 36,
+    "practicePapersCount": 24,
+    "mockTestsCount": 20,
+    "videoLecturesCount": 40
+  },
+  {
+    "id": 9,
+    "name": "Class 9",
+    "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "History & Civics", "Geography", "Economics"],
+    "notesCount": 45,
+    "practicePapersCount": 30,
+    "mockTestsCount": 25,
+    "videoLecturesCount": 50
+  },
+  {
+    "id": 10,
+    "name": "Class 10",
+    "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "History & Civics", "Geography", "Economics"],
+    "notesCount": 50,
+    "practicePapersCount": 35,
+    "mockTestsCount": 30,
+    "videoLecturesCount": 60
+  },
+  {
+    "id": 11,
+    "name": "Class 11",
+    "subjects": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science", "Accountancy", "Business Studies", "Economics"],
+    "notesCount": 65,
+    "practicePapersCount": 40,
+    "mockTestsCount": 35,
+    "videoLecturesCount": 75
+  },
+  {
+    "id": 12,
+    "name": "Class 12",
+    "subjects": ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science", "Accountancy", "Business Studies", "Economics"],
+    "notesCount": 70,
+    "practicePapersCount": 45,
+    "mockTestsCount": 40,
+    "videoLecturesCount": 90
+  }
+]

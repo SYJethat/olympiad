@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Quadratic Equations Short Formula Sheet",
+    "subject": "Mathematics",
+    "class": "Class 10",
+    "type": "Formula Sheet",
+    "fileSize": "1.2 MB",
+    "downloads": 1420
+  },
+  {
+    "id": 2,
+    "title": "Newtonian Mechanics Comprehensive Lecture Notes",
+    "subject": "Physics",
+    "class": "Class 11",
+    "type": "Lecture Notes",
+    "fileSize": "4.5 MB",
+    "downloads": 980
+  },
+  {
+    "id": 3,
+    "title": "Periodic Table Trends & Mnemonics",
+    "subject": "Chemistry",
+    "class": "Class 10",
+    "type": "Cheat Sheet",
+    "fileSize": "850 KB",
+    "downloads": 2400
+  },
+  {
+    "id": 4,
+    "title": "Cell Biology Diagrammatic Revision Guide",
+    "subject": "Biology",
+    "class": "Class 9",
+    "type": "Revision Guide",
+    "fileSize": "3.1 MB",
+    "downloads": 1150
+  },
+  {
+    "id": 5,
+    "title": "Active and Passive Voice Rules Handbook",
+    "subject": "English",
+    "class": "Class 8",
+    "type": "Rules Handbook",
+    "fileSize": "620 KB",
+    "downloads": 850
+  },
+  {
+    "id": 6,
+    "title": "Global Warming & Ecology Project Guidelines",
+    "subject": "Environmental Studies",
+    "class": "Class 5",
+    "type": "Summary Sheet",
+    "fileSize": "1.1 MB",
+    "downloads": 430
+  }
+]
