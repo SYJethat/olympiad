@@ -47,22 +47,22 @@ export default function Navbar() {
       <header className="w-full relative z-40 bg-white transition-colors duration-300">
 
         {/* 1. GOVERNMENT TOPMOST BAR - Dark Teal Blue (#007799) */}
-        {/* <div className="bg-[#007799] text-white text-[10px] md:text-[11px] py-1.5 px-4 font-medium border-b border-white/10 select-none">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2"> */}
+        <div className="bg-[#007799] text-white text-[10px] md:text-[11px] py-1.5 px-4 font-medium border-b border-white/10 select-none">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
 
-        {/* Left: Ministry / Govt designations */}
-        {/* <div className="flex flex-wrap items-center gap-3">
+            {/* Left: Ministry / Govt designations */}
+            <div className="flex flex-wrap items-center gap-3">
               <span className="border-r border-white/35 pr-3 font-semibold">भारत सरकार | Government of India</span>
               <span className="font-semibold">शिक्षा मंत्रालय | Ministry of Education</span>
-            </div> */}
+            </div>
 
-        {/* Center: Dynamic Current Date */}
-        {/* <div className="hidden lg:block text-white/90 font-mono">
+            {/* Center: Dynamic Current Date */}
+            <div className="hidden lg:block text-white/90 font-mono">
               {currentDateStr}
-            </div> */}
+            </div>
 
-        {/* Right: Accessibility Controls & Language switcher */}
-        {/* <div className="flex items-center gap-3.5">
+            {/* Right: Accessibility Controls & Language switcher */}
+            <div className="flex items-center gap-3.5">
               <a href="#main-content" className="hover:underline text-white/80">Skip to main content</a>
               <span className="text-white/30">|</span>
               <button
@@ -73,13 +73,13 @@ export default function Navbar() {
               </button>
               <span className="text-white/30">|</span>
               <span className="font-bold text-secondary-light">EN</span>
-            </div> */}
+            </div>
 
-        {/* </div>
-        </div> */}
+          </div>
+        </div>
 
         {/* 2. SECONDARY TEAL LINKS ROW - Medium Teal (#0092bc) */}
-        {/* <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none">
+        <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none">
           <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6">
             <Link href="/" className="hover:text-yellow-300 transition-colors">Home</Link>
             <span className="text-white/20">|</span>
@@ -93,7 +93,7 @@ export default function Navbar() {
             <span className="text-white/20">|</span>
             <a href="https://sanskritolympiad.in/login" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Login Portal</a>
           </div>
-        </div> */}
+        </div>
 
         {/* 3. MAIN UNIVERSITY BRANDING LOGO ROW - Solid White background */}
         <div className="w-full bg-white py-4 px-4 md:px-8 border-b border-zinc-100 select-none">
