@@ -5,7 +5,31 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#150a1b] text-white/70 py-12 px-6 border-t border-secondary/15">
+    <>
+      {/* Partner Organizations Logo Bar */}
+      <section className="py-12 bg-white dark:bg-zinc-950 border-t border-zinc-200/50 dark:border-zinc-900 select-none">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h3 className="text-[10px] uppercase font-black tracking-widest text-[#007799] mb-8 font-display">
+            Partner Organizations &amp; Companies
+          </h3>
+          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-75 dark:opacity-90">
+            <a href="https://www.sanskrit.nic.in/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+              <img src="/csu.png" alt="CSU Logo" className="h-8 md:h-11 w-auto object-contain dark:brightness-200" />
+            </a>
+            <a href="https://jethat.in/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+              <img src="/jethat.png" alt="JetHat Logo" className="h-8 md:h-11 w-auto object-contain dark:brightness-200" />
+            </a>
+            <a href="https://www.msp.ac.in/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+              <img src="/msp.png" alt="MSP Logo" className="h-8 md:h-11 w-auto object-contain dark:brightness-200" />
+            </a>
+            <a href="https://www.education.gov.in/" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
+              <img src="/ministry.png" alt="Ministry of Education" className="h-8 md:h-11 w-auto object-contain dark:brightness-200" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-[#150a1b] text-white/70 py-12 px-6 border-t border-secondary/15">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         
         {/* Logo brand footer image */}
@@ -80,5 +104,6 @@ export default function Footer() {
 
       </div>
     </footer>
+    </>
   );
 }

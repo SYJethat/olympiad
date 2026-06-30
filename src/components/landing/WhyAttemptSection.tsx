@@ -1,0 +1,97 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+
+export default function WhyAttemptSection() {
+  return (
+    <section className="py-24 px-6 bg-zinc-50 dark:bg-zinc-955 overflow-hidden border-t border-b border-zinc-200/40 dark:border-zinc-800/40">
+      <div className="max-w-7xl mx-auto space-y-20">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-6"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-teal-105 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 text-sm font-medium">
+            🌟 Ancient Wisdom. Modern Edge.
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-zinc-900 dark:text-white">
+            Why Attempt the <span className="text-[#007799]">Sanskrit Olympiad</span>?
+          </h2>
+
+          <p className="max-w-2xl mx-auto text-lg text-zinc-600 dark:text-zinc-400">
+            Where timeless Paninian linguistics meets computational thinking.
+            Unlock cognitive excellence through classical mastery.
+          </p>
+        </motion.div>
+
+        {/* Animated Image Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+
+          {/* Left Card - Slides in from LEFT */}
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="group bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-xl border border-zinc-100 dark:border-zinc-800 hover:shadow-2xl transition-all duration-500"
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src="/img/why_so_left.png"
+                alt="Benefits of Sanskrit Olympiad"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <h3 className="text-2xl font-semibold mb-2">Key Benefits</h3>
+                <p className="text-white/90 text-sm font-medium">Memory • Logic • Analytical Thinking</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Card - Slides in from RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="group bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-xl border border-zinc-100 dark:border-zinc-800 hover:shadow-2xl transition-all duration-500"
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src="/img/why_so_right.png"
+                alt="Sanskrit Olympiad syllabus and benchmarks"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <h3 className="text-2xl font-semibold mb-2">Syllabus Excellence</h3>
+                <p className="text-white/90 text-sm font-medium">Structured levels with global benchmarks</p>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Bottom Text */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center pt-8"
+        >
+          <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto text-xs font-semibold">
+            Join a growing community of students mastering one of the world’s most scientific languages.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
