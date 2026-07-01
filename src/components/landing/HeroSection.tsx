@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative min-h-[80vh] flex flex-col justify-start items-center overflow-hidden pt-16 pb-16 px-4">
+    <section id="home" className="relative min-h-[70vh] flex flex-col justify-start items-center overflow-hidden pt-16 pb-16 px-4">
       {/* Loop video background */}
       <div className="absolute inset-0 z-0">
         <video
