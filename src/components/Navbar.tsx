@@ -72,13 +72,11 @@ export default function Navbar() {
         </div> */}
 
         {/* 2. SECONDARY TEAL LINKS ROW - Medium Teal (#0092bc) */}
-        <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+        <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none overflow-x-auto whitespace-nowrap scrollbar-none">
+          <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-6 min-w-max">
             {/* Left side: Navigation links */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6 items-center">
+            <div className="flex flex-row items-center gap-3 sm:gap-4 lg:gap-6">
               <Link href="/" className="hover:text-yellow-300 transition-colors">Home</Link>
-              <span className="text-white/20">|</span>
-              <Link href="/classes" className="hover:text-yellow-300 transition-colors">Downloads</Link>
               <span className="text-white/20">|</span>
               <Link href="/about" className="hover:text-yellow-300 transition-colors">Circulars</Link>
               <span className="text-white/20">|</span>
@@ -88,8 +86,8 @@ export default function Navbar() {
             </div>
 
             {/* Right side: Action portals */}
-            <div className="flex items-center gap-4 lg:gap-6">
-              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Login Portal</a>
+            <div className="flex flex-row items-center gap-3 sm:gap-4 lg:gap-6">
+              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Institute Login</a>
               <span className="text-white/20">|</span>
               <button
                 onClick={() => setModalOpen(true)}
@@ -103,7 +101,7 @@ export default function Navbar() {
 
         {/* 3. MAIN UNIVERSITY BRANDING LOGO ROW - Solid White background */}
         <div className="w-full bg-white py-4 px-4 md:px-8 border-b border-zinc-100 select-none">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-4">
+          <div className="max-w-7xl mx-auto flex   justify-between items-center gap-4">
 
             {/* Left Side: Circular Logo and Sanskrit University text details */}
             <div className="flex items-center space-x-3.5 text-left">
@@ -156,7 +154,7 @@ export default function Navbar() {
             <div className="flex items-center gap-4 flex-wrap justify-center">
 
               {/* Accreditation details */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 md:block hidden">
                 <div className="relative h-12 w-12 flex-shrink-0">
                   <Image src="/naac.png" alt="Accreditation Seal" fill className="object-contain" />
                 </div>

@@ -84,7 +84,7 @@ export default function CommunityHubSection() {
           {GALLERY_IMAGES.map((img, idx) => (
             <div
               key={idx}
-              className="relative overflow-hidden group aspect-[4/3] bg-zinc-950 border-r border-b border-white/10"
+              className="relative overflow-hidden rounded-md  group aspect-[4/3] bg-zinc-950 border-r border-b border-white/10"
             >
               {/* Image */}
               <img

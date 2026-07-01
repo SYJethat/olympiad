@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Smart Exam Hub | Premium K-12 Educational Platform",
+  title: "Olympiad| CSU | Anuchanam",
   description: "Highly interactive mock test practice papers, board exams notes, and study material guides for classes 1 to 12. Empowering students for academic excellence.",
 };
 

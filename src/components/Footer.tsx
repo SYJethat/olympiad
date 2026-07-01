@@ -241,12 +241,12 @@ export default function Footer() {
             {/* Column 1 – Brand & Mission */}
             <div className="lg:col-span-1 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 flex-shrink-0">
+                <div className="relative h-12 w-12  rounded-full overflow-hidden flex-shrink-0">
                   <Image
-                    src="/img/logo1.png"
+                    src="/logo-1.png"
                     alt="Sanskrit Olympiad Logo"
                     fill
-                    className="object-contain brightness-110"
+                    className="object-contain rounded-full brightness-110"
                   />
                 </div>
                 <div>
@@ -431,7 +431,7 @@ export default function Footer() {
                 Terms
               </a>
               <span className="text-white/10">|</span>
-              <span>Powered by Central Sanskrit University & Little Guru</span>
+              <span>Powered by Anuchanam & Jethat  </span>
             </div>
           </div>
         </div>

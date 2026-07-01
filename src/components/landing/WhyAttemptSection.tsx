@@ -49,7 +49,7 @@ export default function WhyAttemptSection() {
 
               <div className="absolute bottom-8 left-32  ">
                 <h3 className="text-2xl font-semibold mb-2">Key Benefits</h3>
-                <p className="text-zinc-900 dark:text-zinc-200/90 text-sm font-medium">Memory • Logic • Analytical Thinking</p>
+                <p className="text-black text-sm font-medium">Memory • Logic • Analytical Thinking</p>
               </div>
             </div>
           </motion.div>
@@ -72,7 +72,7 @@ export default function WhyAttemptSection() {
 
               <div className="absolute bottom-8 left-8 right-8 ">
                 <h3 className="text-2xl font-semibold mb-2">Syllabus Excellence</h3>
-                <p className="text-zinc-900 dark:text-zinc-200/90 text-sm font-medium">Structured levels with global benchmarks</p>
+                <p className="text-black text-sm font-medium">Structured levels with global benchmarks</p>
               </div>
             </div>
           </motion.div>
@@ -85,9 +85,9 @@ export default function WhyAttemptSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center pt-8"
+          className="text-center bg-gradient-to-r from-red-200 to-blue-400 p-6 rounded-2xl"
         >
-          <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto text-xs font-semibold">
+          <p className="text-black  max-w-md mx-auto text-xs font-semibold">
             Join a growing community of students mastering one of the world’s most scientific languages.
           </p>
         </motion.div>
