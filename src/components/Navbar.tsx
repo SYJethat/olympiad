@@ -87,7 +87,7 @@ export default function Navbar() {
 
             {/* Right side: Action portals */}
             <div className="flex flex-row items-center gap-3 sm:gap-4 lg:gap-6">
-              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Institute Login</a>
+              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Institute Portal</a>
               <span className="text-white/20">|</span>
               <button
                 onClick={() => setModalOpen(true)}
@@ -137,7 +137,7 @@ export default function Navbar() {
                 Under Ministry of Education, Govt. of India
               </p>
             </div>
-              {/* <div >
+            {/* <div >
                
                 <h1 className="text-sm md:text-base font-extrabold text-blue-900 leading-tight">
                   केन्द्रीय संस्कृत विश्वविद्यालय
@@ -213,11 +213,10 @@ export default function Navbar() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`px-4 py-2 transition-all duration-300 ${
-                        isActive
+                      className={`px-4 py-2 transition-all duration-300 ${isActive
                           ? "text-[#007799] bg-[#007799]/10 font-extrabold"
                           : "text-zinc-600 hover:text-[#007799] hover:bg-[#007799]/5"
-                      }`}
+                        }`}
                     >
                       {link.name}
                     </Link>
@@ -232,11 +231,10 @@ export default function Navbar() {
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
-                  className={`flex items-center px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeDropdown === "results"
+                  className={`flex items-center px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${activeDropdown === "results"
                       ? "text-[#007799] bg-[#007799]/10 font-extrabold"
                       : "text-zinc-600 hover:text-[#007799] hover:bg-[#007799]/5"
-                  }`}
+                    }`}
                 >
                   <span>Olympiad Results</span>
                   <ChevronDown className={`h-3.5 w-3.5 ml-1 transition-transform duration-300 ${activeDropdown === "results" ? "rotate-180" : ""}`} />
