@@ -39,7 +39,7 @@ const GAMES = [
   {
     title: "Phonetics & Audio Guides",
     description: "Explore the acoustics, phonetic structures, and speech synthesis systems of ancient Sanskrit. This module features real-time speech analytics, feedback loops, and audio benchmarks to help students master accurate pronunciation, certified by leading Central Sanskrit University faculties.",
-    img: "/img/so_games/game4.png",
+    img: "/phonetics.png",
     tag: "Olympiad Special",
     color: "text-[#FFC107]", // Gold Heading
     hoverColor: "hover:text-[#E0A800]",

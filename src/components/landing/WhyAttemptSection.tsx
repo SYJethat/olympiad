@@ -80,18 +80,21 @@ export default function WhyAttemptSection() {
         </div>
 
         {/* Bottom Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center bg-gradient-to-r from-red-200 to-blue-400 p-6 rounded-2xl"
-        >
-          <p className="text-black  max-w-md mx-auto text-xs font-semibold">
-            Join a growing community of students mastering one of the world’s most scientific languages.
-          </p>
-        </motion.div>
-      </div>
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-500 via-pink-500 to-blue-600 p-8 md:p-10 shadow-2xl"
+>
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+
+  <div className="relative z-10">
+    <p className="mx-auto max-w-3xl text-xl md:text-3xl font-extrabold justify-center items-center text-center leading-relaxed text-white">
+  Join a growing community of students mastering one of the world’s most scientific languages.
+    </p>
+  </div>
+</motion.div>      </div>
     </section>
   );
 }

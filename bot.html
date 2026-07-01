@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jethat Assistant</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="background: #22c55e;">
+    <!-- AI Chatbot Widget - Transparent + Label -->
+    <div id="chat-container-4189a3f0-6366-45a1-bab7-c1a240a6c4b1">
+
+        <!-- Floating Label -->
+        <div id="chat-label-4189a3f0-6366-45a1-bab7-c1a240a6c4b1">
+            <span class="pulse-dot"></span>
+            We’re here to help 👋
+        </div>
+
+        <!-- Chat Icon -->
+        <div id="chat-icon-4189a3f0-6366-45a1-bab7-c1a240a6c4b1">
+            <div id="chat-symbol-wrapper-4189a3f0-6366-45a1-bab7-c1a240a6c4b1">
+                <!-- SVG Custom Chat Icon -->
+                <svg id="svg-chat" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                </svg>
+                <!-- SVG Custom Close Icon (Hidden by default) -->
+                <svg id="svg-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chatbot iframe -->
+    <iframe id="chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1"
+        src="https://sambhasini.jethat.in/widget/4189a3f0-6366-45a1-bab7-c1a240a6c4b1?disable-hmr=true"
+        title="Jethat Assistant - Client Relations Specialist" loading="lazy" allow="clipboard-write"></iframe>
+        
+    <script>
+        (function () {
+            const container = document.getElementById('chat-container-4189a3f0-6366-45a1-bab7-c1a240a6c4b1');
+            const chatIcon = document.getElementById('chat-icon-4189a3f0-6366-45a1-bab7-c1a240a6c4b1');
+            const chatFrame = document.getElementById('chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1');
+            const svgChat = document.getElementById('svg-chat');
+            const svgClose = document.getElementById('svg-close');
+            const label = document.getElementById('chat-label-4189a3f0-6366-45a1-bab7-c1a240a6c4b1');
+            const wrapper = document.getElementById('chat-symbol-wrapper-4189a3f0-6366-45a1-bab7-c1a240a6c4b1');
+
+            let isOpen = false;
+
+            function openChat() {
+                isOpen = true;
+
+                // Animate Close Symbol inside Icon first
+                wrapper.style.transform = 'rotate(90deg)';
+                setTimeout(() => {
+                    svgChat.style.display = 'none';
+                    svgClose.style.display = 'block';
+                    wrapper.style.transform = 'rotate(0deg)';
+                }, 100);
+
+                // Hide label with opacity transition
+                if (label) {
+                    label.style.opacity = '0';
+                    label.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        label.style.display = 'none';
+                    }, 300);
+                }
+
+                // Show iframe from bottom
+                chatFrame.style.display = 'block';
+                requestAnimationFrame(() => {
+                    chatFrame.classList.add('open');
+                });
+            }
+
+            function closeChat() {
+                isOpen = false;
+
+                // Animate Chat Symbol inside Icon first
+                wrapper.style.transform = 'rotate(-90deg)';
+                setTimeout(() => {
+                    svgClose.style.display = 'none';
+                    svgChat.style.display = 'block';
+                    wrapper.style.transform = 'rotate(0deg)';
+                }, 100);
+
+                chatFrame.classList.remove('open');
+
+                setTimeout(() => {
+                    chatFrame.style.display = 'none';
+
+                    // Show label again
+                    if (label) {
+                        label.style.display = 'flex';
+                        requestAnimationFrame(() => {
+                            label.style.opacity = '1';
+                            label.style.transform = 'translateY(0)';
+                        });
+                    }
+                }, 300);
+            }
+
+            // Toggle on icon click
+            chatIcon.addEventListener('click', function (e) {
+                e.stopPropagation();
+                isOpen ? closeChat() : openChat();
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', function (e) {
+                if (isOpen && !chatFrame.contains(e.target) && !container.contains(e.target)) {
+                    closeChat();
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === "Escape" && isOpen) closeChat();
+            });
+        })();
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Container */
+        #chat-container-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+
+        #chat-container-4189a3f0-6366-45a1-bab7-c1a240a6c4b1>* {
+            pointer-events: auto;
+        }
+
+        /* Floating Label */
+        #chat-label-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+            background: #ffffff;
+            color: #1e293b;
+            padding: 10px 16px;
+            border-radius: 24px;
+            font-size: 13.5px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            white-space: nowrap;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            user-select: none;
+        }
+
+        /* Pulsing Dot Indicator */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+        }
+
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #22c55e;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            animation: pulse-ring 1.8s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        /* Chat Icon Container */
+        #chat-icon-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f07400 0%, #ff8c1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(240, 116, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #chat-symbol-wrapper-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+            width: 26px;
+            height: 26px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #chat-symbol-wrapper-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        #chat-icon-4189a3f0-6366-45a1-bab7-c1a240a6c4b1:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 14px 30px rgba(240, 116, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        #chat-icon-4189a3f0-6366-45a1-bab7-c1a240a6c4b1:active {
+            transform: scale(0.96) translateY(0);
+        }
+
+        /* Chat Frame */
+        #chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 390px;
+            height: 600px;
+            border: none;
+            border-radius: 20px;
+            display: none;
+            opacity: 0;
+            transform: scale(0.92) translateY(20px);
+            transform-origin: bottom right;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 99998;
+            background: transparent !important;
+            box-shadow: none !important;
+            pointer-events: auto;
+        }
+
+        #chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1.open {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            #chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+                width: 100vw;
+                height: 100vh;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+            }
+
+            #chat-container-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            #chat-frame-4189a3f0-6366-45a1-bab7-c1a240a6c4b1 {
+                width: 420px;
+                height: 660px;
+            }
+        }
+    </style>
+</body>
+
+</html>

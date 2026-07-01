@@ -79,18 +79,18 @@ export default function CommunityHubSection() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full max-w-7xl mx-auto overflow-hidden shadow-2xl border border-zinc-200/50 bg-white grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1"
+          className="w-full max-w-7xl mx-auto overflow-hidden   grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1"
         >
           {GALLERY_IMAGES.map((img, idx) => (
             <div
               key={idx}
-              className="relative overflow-hidden rounded-md  group aspect-[4/3] bg-zinc-950 border-r border-b border-white/10"
+              className="relative overflow-hidden rounded-[15px]  group aspect-[4/3] bg-zinc-950 border-r border-b border-white/10"
             >
               {/* Image */}
               <img
                 src={img.src}
                 alt={img.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                className="w-full  h-full rounded-[10px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
               />
 
               {/* Overlay Gradient Mask */}
