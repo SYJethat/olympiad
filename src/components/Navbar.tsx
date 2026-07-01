@@ -47,51 +47,57 @@ export default function Navbar() {
       <header className="w-full relative z-40 bg-white transition-colors duration-300">
 
         {/* 1. GOVERNMENT TOPMOST BAR - Dark Teal Blue (#007799) */}
-        <div className="bg-[#007799] text-white text-[10px] md:text-[11px] py-1.5 px-4 font-medium border-b border-white/10 select-none">
+        {/* <div className="bg-[#007799] text-white text-[10px] md:text-[11px] py-1.5 px-4 font-medium border-b border-white/10 select-none">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
 
-            {/* Left: Ministry / Govt designations */}
             <div className="flex flex-wrap items-center gap-3">
               <span className="border-r border-white/35 pr-3 font-semibold">भारत सरकार | Government of India</span>
               <span className="font-semibold">शिक्षा मंत्रालय | Ministry of Education</span>
             </div>
 
-            {/* Center: Dynamic Current Date */}
+      
             <div className="hidden lg:block text-white/90 font-mono">
               {currentDateStr}
             </div>
 
-            {/* Right: Accessibility Controls & Language switcher */}
             <div className="flex items-center gap-3.5">
               <a href="#main-content" className="hover:underline text-white/80">Skip to main content</a>
               <span className="text-white/30">|</span>
+             
+              <span className="text-white/30">|</span>
+              <span className="font-bold text-secondary-light">EN</span>
+            </div>
+
+          </div>
+        </div> */}
+
+        {/* 2. SECONDARY TEAL LINKS ROW - Medium Teal (#0092bc) */}
+        <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            {/* Left side: Navigation links */}
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6 items-center">
+              <Link href="/" className="hover:text-yellow-300 transition-colors">Home</Link>
+              <span className="text-white/20">|</span>
+              <Link href="/classes" className="hover:text-yellow-300 transition-colors">Downloads</Link>
+              <span className="text-white/20">|</span>
+              <Link href="/about" className="hover:text-yellow-300 transition-colors">Circulars</Link>
+              <span className="text-white/20">|</span>
+              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">FAQ</a>
+              <span className="text-white/20">|</span>
+              <Link href="/contact" className="hover:text-yellow-300 transition-colors">Contact Us</Link>
+            </div>
+
+            {/* Right side: Action portals */}
+            <div className="flex items-center gap-4 lg:gap-6">
+              <a href="" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Login Portal</a>
+              <span className="text-white/20">|</span>
               <button
                 onClick={() => setModalOpen(true)}
                 className="hover:underline text-secondary-light font-bold flex items-center gap-1 cursor-pointer"
               >
                 <span>Recover Login</span>
               </button>
-              <span className="text-white/30">|</span>
-              <span className="font-bold text-secondary-light">EN</span>
             </div>
-
-          </div>
-        </div>
-
-        {/* 2. SECONDARY TEAL LINKS ROW - Medium Teal (#0092bc) */}
-        <div className="bg-[#0092bc] text-white text-[11px] py-2 px-4 font-semibold select-none">
-          <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6">
-            <Link href="/" className="hover:text-yellow-300 transition-colors">Home</Link>
-            <span className="text-white/20">|</span>
-            <Link href="/classes" className="hover:text-yellow-300 transition-colors">Downloads</Link>
-            <span className="text-white/20">|</span>
-            <Link href="/about" className="hover:text-yellow-300 transition-colors">Circulars</Link>
-            <span className="text-white/20">|</span>
-            <a href="https://sanskritolympiad.in/so_faq" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">FAQ</a>
-            <span className="text-white/20">|</span>
-            <Link href="/contact" className="hover:text-yellow-300 transition-colors">Contact Us</Link>
-            <span className="text-white/20">|</span>
-            <a href="https://sanskritolympiad.in/login" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-yellow-300 font-extrabold">Login Portal</a>
           </div>
         </div>
 
@@ -101,16 +107,17 @@ export default function Navbar() {
 
             {/* Left Side: Circular Logo and Sanskrit University text details */}
             <div className="flex items-center space-x-3.5 text-left">
-              <Link href="/" className="relative h-16 w-16 md:h-18 md:w-18 flex-shrink-0">
-                <Image
-                  src="/img/logo1.png"
+              <Link href="/" className="relative flex-shrink-0 block">
+                <img
+                  src="/navbar.png"
                   alt="CSU circular emblem"
-                  fill
-                  className="object-contain"
-                  priority
+                  className="h-14 md:h-20 w-auto object-contain"
                 />
+                <span className="absolute left-[36%] top-[25%] text-[6px] sm:text-[9px] md:text-[10px] font-black text-red-700 tracking-wider uppercase select-none">
+                  Central Sanskrit University
+                </span>
               </Link>
-              <div>
+              {/* <div>
                 <h1 className="text-sm md:text-base font-extrabold text-blue-900 leading-tight">
                   केन्द्रीय संस्कृत विश्वविद्यालय
                 </h1>
@@ -120,7 +127,7 @@ export default function Navbar() {
                 <p className="text-[9px] text-zinc-500 font-semibold mt-0.5 leading-none">
                   संसद् के अधिनियम द्वारा स्थापित | Established by an Act of Parliament
                 </p>
-              </div>
+              </div> */}
             </div>
 
             {/* Center Column: Parliamentary details */}
@@ -132,6 +139,18 @@ export default function Navbar() {
                 Under Ministry of Education, Govt. of India
               </p>
             </div>
+              {/* <div >
+               
+                <h1 className="text-sm md:text-base font-extrabold text-blue-900 leading-tight">
+                  केन्द्रीय संस्कृत विश्वविद्यालय
+                </h1>
+                <h2 className="text-xs md:text-sm font-bold text-red-700 leading-tight">
+                  Central Sanskrit University
+                </h2>
+                <p className="text-[9px] text-zinc-500 font-semibold mt-0.5 leading-none">
+                  संसद् के अधिनियम द्वारा स्थापित | Established by an Act of Parliament
+                </p>
+              </div> */}
 
             {/* Right Side: NAAC accreditation and Search Bar & Student portal button */}
             <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -139,7 +158,7 @@ export default function Navbar() {
               {/* Accreditation details */}
               <div className="flex items-center space-x-2">
                 <div className="relative h-12 w-12 flex-shrink-0">
-                  <Image src="/img/so_banner_icon.png" alt="Accreditation Seal" fill className="object-contain" />
+                  <Image src="/naac.png" alt="Accreditation Seal" fill className="object-contain" />
                 </div>
                 <div className="text-[9px] text-zinc-600 font-extrabold leading-tight">
                   <span className="text-red-700 block">NAAC A++</span>
@@ -158,7 +177,7 @@ export default function Navbar() {
                   <Search className="h-3.5 w-3.5 text-zinc-400 absolute right-2.5 top-2" />
                 </div>
                 <a
-                  href="https://sanskritolympiad.in/login"
+                  href=""
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#007799] hover:bg-[#005577] text-white font-bold text-xs px-4 py-2 rounded-lg shadow-sm transition-all duration-200"
@@ -180,26 +199,27 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
 
           {/* Logo brand label */}
-          <Link href="/" className="flex items-center space-x-1">
-            <HomeIcon className="h-4.5 w-4.5 text-[#007799]" />
-            <span className="font-extrabold text-sm text-[#007799] tracking-wider uppercase font-display">
+          <Link href="/" className="flex items-center space-x-1 flex-shrink-0">
+            <HomeIcon className="h-4.5 w-4.5 text-red-800" />
+            <span className="font-extrabold text-sm text-red-800 tracking-wider uppercase font-display">
               Sanskrit Olympiad
             </span>
           </Link>
 
           {/* Desktop Nav Items */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <ul className="flex space-x-1 text-xs font-bold text-zinc-700 uppercase tracking-wider">
+          <div className="hidden lg:flex items-center">
+            <ul className="flex items-center space-x-1 text-xs font-bold text-zinc-700 uppercase tracking-wider">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`px-3.5 py-2.5 rounded-lg transition-all duration-200 ${isActive
-                        ? "text-[#007799] bg-zinc-50 font-black border-b-2 border-[#007799]"
-                        : "hover:text-[#007799] hover:bg-zinc-50"
-                        }`}
+                      className={`px-4 py-2 transition-all duration-300 ${
+                        isActive
+                          ? "text-[#007799] bg-[#007799]/10 font-extrabold"
+                          : "text-zinc-600 hover:text-[#007799] hover:bg-[#007799]/5"
+                      }`}
                     >
                       {link.name}
                     </Link>
@@ -213,12 +233,18 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown("results")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="flex items-center px-3.5 py-2.5 hover:text-[#007799] hover:bg-zinc-50 rounded-lg cursor-pointer">
+                <button
+                  className={`flex items-center px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeDropdown === "results"
+                      ? "text-[#007799] bg-[#007799]/10 font-extrabold"
+                      : "text-zinc-600 hover:text-[#007799] hover:bg-[#007799]/5"
+                  }`}
+                >
                   <span>Olympiad Results</span>
-                  <ChevronDown className="h-3.5 w-3.5 ml-1" />
+                  <ChevronDown className={`h-3.5 w-3.5 ml-1 transition-transform duration-300 ${activeDropdown === "results" ? "rotate-180" : ""}`} />
                 </button>
                 {activeDropdown === "results" && (
-                  <div className="absolute top-full left-0 mt-1 w-56 rounded-lg bg-white p-2 shadow-xl border border-zinc-200">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2  w-56  bg-white p-2 shadow-xl z-10 border border-zinc-200">
                     <a
                       href="https://sanskritolympiad.in/result?quiz_id=2"
                       target="_blank"
@@ -247,20 +273,6 @@ export default function Navbar() {
                 )}
               </li>
             </ul>
-
-            <span className="h-5 w-[1px] bg-zinc-200" />
-
-            {/* Portal Action Buttons */}
-            <div className="flex items-center space-x-3">
-              <a
-                href="https://sanskritolympiad.in/so_knownmore"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#EEA410] hover:bg-[#EEA410]/95 text-zinc-950 font-extrabold text-xs tracking-wider px-5 py-2.5 rounded-lg shadow-sm transition-all duration-200"
-              >
-                REGISTER NOW
-              </a>
-            </div>
           </div>
 
           {/* Mobile menu trigger */}

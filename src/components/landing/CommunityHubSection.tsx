@@ -50,7 +50,7 @@ const GALLERY_IMAGES = [
 export default function CommunityHubSection() {
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-transparent via-[#007799]/5 to-transparent border-t border-zinc-200/40 relative select-none">
-      <div className="max-w-6xl mx-auto space-y-12 text-center">
+      <div className="max-w-8xl mx-auto space-y-12 text-center">
 
         {/* Header Block */}
         <motion.div
@@ -79,7 +79,7 @@ export default function CommunityHubSection() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full max-w-5xl mx-auto overflow-hidden shadow-2xl border border-zinc-200/50 bg-white grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1"
+          className="w-full max-w-7xl mx-auto overflow-hidden shadow-2xl border border-zinc-200/50 bg-white grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1"
         >
           {GALLERY_IMAGES.map((img, idx) => (
             <div

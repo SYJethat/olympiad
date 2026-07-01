@@ -15,8 +15,8 @@ export default function NoticeTicker() {
   }, []);
 
   return (
-    <div className="bg-[#7a1d59] text-white flex items-center h-10 text-xs font-semibold select-none overflow-hidden border-b border-[#EEA410]/30 relative z-30 shadow-md">
-      <div className="flex-shrink-0 flex items-center gap-1.5 bg-red-600 px-5 h-full z-10 shadow-lg select-none">
+    <div className="bg-primary-dark text-white flex items-center h-10 text-xs font-semibold select-none overflow-hidden border-b border-accent/30 relative z-30 shadow-md">
+      <div className="flex-shrink-0 flex items-center gap-1.5 bg-[#D32F2F] px-5 h-full z-10 shadow-lg select-none">
         <FileText className="h-3.5 w-3.5 text-white" />
         <span className="uppercase tracking-widest text-[9.5px] font-black whitespace-nowrap text-white">Latest Updates</span>
       </div>
@@ -25,7 +25,7 @@ export default function NoticeTicker() {
           📢 Registration for Sanskrit Olympiad Season 4 is now active! Complete your registration profile to generate student credentials. | 🏆 Win special gold/silver medals and scholarships certified by Central Sanskrit University & Little Guru. | 🎮 Experience the world&apos;s first gamified Sanskrit learning modules.
         </div>
       </div>
-      <div className="flex-shrink-0 flex items-center gap-1.5 border-l border-white/10 px-5 h-full text-white/80 text-[10px] bg-[#7a1d59]/90 font-mono">
+      <div className="flex-shrink-0 flex items-center gap-1.5 border-l border-white/10 px-5 h-full text-white/80 text-[10px] bg-primary-dark/95 font-mono">
         <Clock className="h-3.5 w-3.5 text-white/70" />
         <span>{dateStr}</span>
       </div>

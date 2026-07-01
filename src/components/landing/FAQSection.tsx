@@ -28,7 +28,7 @@ export default function FAQSection() {
 
   return (
     <section className="py-20 px-6 bg-white border-t border-zinc-200/50 select-none">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         
         {/* Header Block */}
         <motion.div 

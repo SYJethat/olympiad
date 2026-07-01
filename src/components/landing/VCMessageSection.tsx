@@ -8,7 +8,7 @@ import { MessageSquare, Quote } from "lucide-react";
 export default function VCMessageSection() {
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-transparent to-[#007799]/5 relative overflow-hidden select-none">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         
         {/* Header Block */}
         <motion.div 

@@ -40,7 +40,7 @@ export default function SyllabusSection() {
 
   return (
     <section id="syllabus" className="py-20 px-6 bg-gradient-to-b from-[#007799]/5 via-transparent to-transparent relative select-none">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         
         {/* Header Block */}
         <motion.div 

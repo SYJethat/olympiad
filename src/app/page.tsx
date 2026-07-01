@@ -22,7 +22,7 @@ export default function Home() {
       <NoticeTicker />
 
       {/* 3. Core university key stats */}
-      <StatsMetricBar />
+      {/* <StatsMetricBar /> */}
 
       {/* 4. Sanskrit motto block */}
       <MottoSection />

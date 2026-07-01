@@ -29,7 +29,7 @@ export default function WhyAttemptSection() {
         </motion.div>
 
         {/* Animated Image Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
 
           {/* Left Card - Slides in from RIGHT-TO-LEFT */}
           <motion.div
