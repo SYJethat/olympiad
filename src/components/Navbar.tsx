@@ -174,14 +174,12 @@ export default function Navbar() {
                   />
                   <Search className="h-3.5 w-3.5 text-zinc-400 absolute right-2.5 top-2" />
                 </div>
-                <a
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/student-portal"
                   className="bg-[#007799] hover:bg-[#005577] text-white font-bold text-xs px-4 py-2 rounded-lg shadow-sm transition-all duration-200"
                 >
                   Student Portal
-                </a>
+                </Link>
               </div>
 
             </div>
@@ -241,30 +239,24 @@ export default function Navbar() {
                 </button>
                 {activeDropdown === "results" && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2  w-56  bg-white p-2 shadow-xl z-10 border border-zinc-200">
-                    <a
-                      href="https://sanskritolympiad.in/result?quiz_id=2"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/result?quiz_id=2"
                       className="block rounded-lg px-4 py-2.5 text-xs text-zinc-700 hover:bg-zinc-50 hover:text-[#007799] transition-colors font-bold"
                     >
                       Sanskrit Olympiad Result
-                    </a>
-                    <a
-                      href="https://sanskritolympiad.in/result?quiz_id=2"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    </Link>
+                    <Link
+                      href="/result?quiz_id=1"
                       className="block rounded-lg px-4 py-2.5 text-xs text-zinc-700 hover:bg-zinc-50 hover:text-[#007799] transition-colors font-bold"
                     >
                       Geeta Olympiad Result
-                    </a>
-                    <a
-                      href="https://sanskritolympiad.in/result?quiz_id=3"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    </Link>
+                    <Link
+                      href="/result?quiz_id=3"
                       className="block rounded-lg px-4 py-2.5 text-xs text-zinc-700 hover:bg-zinc-50 hover:text-[#007799] transition-colors font-bold"
                     >
                       Indian Knowledge System
-                    </a>
+                    </Link>
                   </div>
                 )}
               </li>
@@ -313,18 +305,20 @@ export default function Navbar() {
             </ul>
 
             <div className="grid grid-cols-2 gap-2 pt-2 border-t border-zinc-200">
-              <a
-                href="https://sanskritolympiad.in/login"
+              <Link
+                href="/student-portal?mode=login"
+                onClick={() => setMobileMenuOpen(false)}
                 className="text-center border border-zinc-300 text-zinc-700 px-4 py-2.5 rounded-lg text-xs font-bold"
               >
                 Login
-              </a>
-              <a
-                href="https://sanskritolympiad.in/so_knownmore"
+              </Link>
+              <Link
+                href="/student-portal?mode=register"
+                onClick={() => setMobileMenuOpen(false)}
                 className="text-center bg-[#007799] text-white px-4 py-2.5 rounded-lg text-xs font-bold shadow-sm"
               >
                 Register
-              </a>
+              </Link>
             </div>
           </div>
         )}
