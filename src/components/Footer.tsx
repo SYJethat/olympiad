@@ -125,6 +125,7 @@ const resourceLinks = [
 
 const partners = [
   { src: "/csu.png", alt: "Central Sanskrit University", href: "https://www.sanskrit.nic.in/" },
+  { src: "/anuchanam.png", alt: "Anuchanam", href: "https://anuchanam.in/" },
   { src: "/jethat.png", alt: "JetHat", href: "https://jethat.in/" },
   { src: "/msp.png", alt: "MSP", href: "https://www.msp.ac.in/" },
   { src: "/ministry.png", alt: "Ministry of Education", href: "https://www.education.gov.in/" },

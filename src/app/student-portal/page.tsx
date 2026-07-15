@@ -47,6 +47,11 @@ interface StudentUser {
   fatherName: string;
   hearAbout: string;
   hearOther?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
 }
 
 function StudentPortalContent() {
@@ -58,7 +63,7 @@ function StudentPortalContent() {
   const [activeTab, setActiveTab] = useState<"login" | "register" | "dashboard">("login");
   
   // Dashboard view tab state: 'subjects' | 'scores' | 'certificate' | 'edit-profile'
-  const [dashboardTab, setDashboardTab] = useState<"subjects" | "scores" | "certificate" | "edit-profile">("subjects");
+  const [dashboardTab, setDashboardTab] = useState<"subjects" | "scores" | "certificate" | "edit-profile" | "address" | "logout">("subjects");
 
   // Registration Form States
   const [regName, setRegName] = useState("");
@@ -81,6 +86,13 @@ function StudentPortalContent() {
   const [editHearOther, setEditHearOther] = useState("");
   const [editMobile, setEditMobile] = useState("");
 
+  // Edit Address Form States
+  const [editAddress1, setEditAddress1] = useState("");
+  const [editAddress2, setEditAddress2] = useState("");
+  const [editCity, setEditCity] = useState("");
+  const [editState, setEditState] = useState("");
+  const [editPincode, setEditPincode] = useState("");
+
   // Login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -89,6 +101,14 @@ function StudentPortalContent() {
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [recoveryPhone, setRecoveryPhone] = useState("");
   const [recoverySuccess, setRecoverySuccess] = useState<string | null>(null);
+
+  // OTP Verification state
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [enteredOtp, setEnteredOtp] = useState("");
+  const [pendingUser, setPendingUser] = useState<StudentUser | null>(null);
+  const [pendingPassword, setPendingPassword] = useState("");
+
 
   // Error/Success state
   const [error, setError] = useState<string | null>(null);
@@ -131,6 +151,11 @@ function StudentPortalContent() {
       setEditClassStudy(currentUser.className || "");
       setEditHearAbout(currentUser.hearAbout || "Social Media");
       setEditHearOther(currentUser.hearOther || "");
+      setEditAddress1(currentUser.addressLine1 || "");
+      setEditAddress2(currentUser.addressLine2 || "");
+      setEditCity(currentUser.city || "");
+      setEditState(currentUser.state || "");
+      setEditPincode(currentUser.pincode || "");
     }
   }, [currentUser]);
 
@@ -226,20 +251,51 @@ function StudentPortalContent() {
       hearOther: regHearAbout === "Other" ? regHearOther : ""
     };
 
-    // Save to database simulation
-    existingUsers.push(newUser);
-    localStorage.setItem("registered_students", JSON.stringify(existingUsers));
-    localStorage.setItem(`pass_${regEmail.toLowerCase()}`, regPassword);
-    localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(newUser));
+    // Generate mock OTP and prompt for verification
+    const mockOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(mockOtp);
+    setPendingUser(newUser);
+    setPendingPassword(regPassword);
+    setShowOtpModal(true);
+    setSuccess(`Verification OTP sent to ${regMobile}. Use code ${mockOtp} to complete registration.`);
+  };
 
-    setCurrentUser(newUser);
-    setSuccess("Student registration completed successfully.");
+  // Handle OTP Verification Submit
+  const handleVerifyOtp = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    // Dummy verification - accepts any code entered
+    if (!enteredOtp) {
+      setError("Please enter the verification code.");
+      return;
+    }
+
+
+    if (!pendingUser) return;
+
+    // Save to database simulation
+    const existingUsersRaw = localStorage.getItem("registered_students");
+    const existingUsers: StudentUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+    existingUsers.push(pendingUser);
+    localStorage.setItem("registered_students", JSON.stringify(existingUsers));
+    localStorage.setItem(`pass_${pendingUser.email.toLowerCase()}`, pendingPassword);
+    localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(pendingUser));
+
+    setCurrentUser(pendingUser);
+    setShowOtpModal(false);
+    setPendingUser(null);
+    setPendingPassword("");
+    setEnteredOtp("");
+    setSuccess("OTP Verified! Student registration completed successfully.");
     
     setTimeout(() => {
       setActiveTab("dashboard");
       setSuccess(null);
     }, 2000);
   };
+
 
   // Handle Profile Update Save
   const handleSaveProfile = (e: React.FormEvent) => {
@@ -299,6 +355,57 @@ function StudentPortalContent() {
       setSuccess(null);
     }, 3000);
   };
+
+  // Handle Address Update Save
+  const handleSaveAddress = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    if (!editAddress1 || !editCity || !editState || !editPincode) {
+      setError("Please fill in all mandatory address fields (*).");
+      return;
+    }
+
+    const pincodeRegex = /^\d{6}$/;
+    if (!pincodeRegex.test(editPincode)) {
+      setError("Please enter a valid 6-digit Pincode.");
+      return;
+    }
+
+    if (!currentUser) return;
+
+    // Build updated student object
+    const updatedUser: StudentUser = {
+      ...currentUser,
+      addressLine1: editAddress1,
+      addressLine2: editAddress2,
+      city: editCity,
+      state: editState,
+      pincode: editPincode
+    };
+
+    // Update list of all registered students
+    const existingUsersRaw = localStorage.getItem("registered_students");
+    const existingUsers: StudentUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+    
+    const index = existingUsers.findIndex(u => u.regId === currentUser.regId);
+    if (index !== -1) {
+      existingUsers[index] = updatedUser;
+    } else {
+      existingUsers.push(updatedUser);
+    }
+    
+    localStorage.setItem("registered_students", JSON.stringify(existingUsers));
+    localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(updatedUser));
+    
+    setCurrentUser(updatedUser);
+    setSuccess("Address details updated successfully.");
+    setTimeout(() => {
+      setSuccess(null);
+    }, 3000);
+  };
+
 
   // Handle Login
   const handleLogin = (e: React.FormEvent) => {
@@ -569,6 +676,51 @@ function StudentPortalContent() {
           </div>
         </div>
       )}
+
+      {/* OTP Verification Modal */}
+      {showOtpModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md border border-slate-200 shadow-2xl relative">
+            <button 
+              onClick={() => { setShowOtpModal(false); setPendingUser(null); setPendingPassword(""); setError(null); setSuccess(null); }}
+              className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 font-extrabold cursor-pointer"
+            >
+              ✕
+            </button>
+            <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2 mb-2">
+              <ShieldCheck className="h-5 w-5 text-[#007799]" />
+              Verify Mobile OTP
+            </h3>
+            <p className="text-xs text-slate-500 mb-4">
+              Enter the 6-digit OTP code sent to your mobile number to complete the registration.
+            </p>
+
+            <form onSubmit={handleVerifyOtp} className="space-y-4">
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+                  6-Digit OTP Code <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  maxLength={6}
+                  value={enteredOtp}
+                  onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ""))}
+                  placeholder="e.g. 123456"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#007799] focus:bg-white text-center font-bold tracking-widest text-lg"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#007799] hover:bg-[#005577] text-white py-3.5 rounded-xl font-bold text-xs shadow-md cursor-pointer transition-all"
+              >
+                Verify & Login
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
 
       <div className="max-w-7xl mx-auto">
         
@@ -1098,6 +1250,27 @@ function StudentPortalContent() {
                     <Edit3 className="h-4 w-4" />
                     <span>Edit Profile Details</span>
                   </button>
+                  <button
+                    onClick={() => setDashboardTab("address")}
+                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "address"
+                        ? "bg-[#007799] text-white shadow-sm"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    }`}
+                  >
+                    <Edit3 className="h-4 w-4" />
+                    <span>Add/Edit Address</span>
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                  className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "logout"
+                        ? "bg-[#007799] text-white shadow-sm"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    }`}                  >
+                    <LogOut className="h-4 w-4" />
+                  <span>Log Out</span>
+                </button>
                 </div>
 
                 {/* Always visible WhatsApp Community support box */}
@@ -1546,6 +1719,139 @@ function StudentPortalContent() {
                         >
                           <Save className="h-4 w-4" />
                           <span>Save Profile Details</span>
+                        </button>
+                      </div>
+
+                    </form>
+                  </div>
+                )}
+                {dashboardTab === "address" && (
+                  <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm animate-fade-in">
+                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                      <Edit3 className="h-4 w-4 text-[#007799]" />
+                      Address Details
+                    </h3>
+                    <p className="text-xs text-slate-500 mb-6">
+                      Modify your registered address credentials below. Fields marked with <span className="text-red-500">*</span> are required.
+                    </p>
+
+                    <form onSubmit={handleSaveAddress} className="space-y-5">
+                      
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                          Address Line 1 <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="House No, Street, Landmark"
+                          value={editAddress1}
+                          onChange={(e) => setEditAddress1(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                          Address Line 2 (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Area, Locality, Suburb"
+                          value={editAddress2}
+                          onChange={(e) => setEditAddress2(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                            City/Town <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Mumbai"
+                            value={editCity}
+                            onChange={(e) => setEditCity(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                            State/Union Territory <span className="text-red-500">*</span>
+                          </label>
+                          <select
+                            value={editState}
+                            onChange={(e) => setEditState(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
+                          >
+                            <option value="">Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                            Pincode <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            pattern="\d{6}"
+                            maxLength={6}
+                            placeholder="6-digit pin"
+                            value={editPincode}
+                            onChange={(e) => setEditPincode(e.target.value.replace(/\D/g, ""))}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-4 flex justify-end">
+                        <button
+                          type="submit"
+                          className="px-6 py-3 rounded-xl bg-[#007799] hover:bg-[#005577] text-white text-xs font-bold shadow-md cursor-pointer transition-all flex items-center gap-1.5"
+                        >
+                          <Save className="h-4 w-4" />
+                          <span>Save Address Details</span>
                         </button>
                       </div>
 
