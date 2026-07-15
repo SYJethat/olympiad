@@ -1174,8 +1174,8 @@ function StudentPortalContent() {
                     </div>
 
                     {/* Printable marksheet area */}
-                    <div ref={marksheetRef} className="bg-white p-4 border rounded-md">
-                      {/* Marksheet Print Header (styled nicely) */}
+                    {/* <div ref={marksheetRef} className="bg-white p-4 border rounded-md">
+                     
                       <div className="mb-6 border-b-2 border-slate-900 pb-4 text-center space-y-2">
                         <div className="flex justify-center items-center gap-3">
                           <img src="/navbar.png" alt="CSU Logo" className="h-12 w-auto object-contain" />
@@ -1190,7 +1190,7 @@ function StudentPortalContent() {
                           Official Evaluation Marksheet
                         </h3>
 
-                        {/* Student Details Grid */}
+                       
                         <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-left text-xs pt-4 text-slate-700">
                           <div>
                             <span className="font-semibold text-slate-500">Student Name:</span>{" "}
@@ -1248,7 +1248,7 @@ function StudentPortalContent() {
                         </table>
                       </div>
 
-                      {/* Signatures & Verification Area for printing */}
+                  
                       <div className="mt-8 pt-6 border-t border-slate-200 flex justify-between items-end text-xs text-slate-600">
                         <div className="space-y-1">
                           <div>Evaluation Status: <strong className="text-emerald-700">PASSED</strong></div>
@@ -1303,7 +1303,7 @@ function StudentPortalContent() {
                           All Rights Reserved.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                       <div className="text-xs text-slate-500 font-semibold">
@@ -1339,7 +1339,7 @@ function StudentPortalContent() {
                       </button>
                     </div>
 
-                    <div className="overflow-x-auto border border-slate-200 rounded-xl p-4 bg-slate-50 flex justify-center">
+                    {/* <div className="overflow-x-auto border border-slate-200 rounded-xl p-4 bg-slate-50 flex justify-center">
                       <div
                         ref={certificateRef}
                         className="bg-white w-[750px] min-w-[750px] h-[500px] border-[16px] border-double border-amber-600 p-8 flex flex-col justify-between relative shadow-lg overflow-hidden select-none"
@@ -1407,7 +1407,7 @@ function StudentPortalContent() {
                         </div>
 
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 )}
 
