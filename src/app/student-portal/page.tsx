@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import {
-  User,
-  Mail,
-  Lock,
-  BookOpen,
-  Award,
-  Printer,
-  ChevronRight,
-  LogOut,
-  CheckCircle2,
-  Trophy,
+import { 
+  User, 
+  Mail, 
+  Lock, 
+  BookOpen, 
+  Award, 
+  Printer, 
+  ChevronRight, 
+  LogOut, 
+  CheckCircle2, 
+  Trophy, 
   AlertCircle,
   ShieldCheck,
   QrCode,
@@ -30,28 +30,23 @@ import {
   Heart,
   RefreshCw,
   Edit3,
-  Save
+  Save,
+  HelpCircle,
+  School
 } from "lucide-react";
 
 interface StudentUser {
-  regId: string;
+  regId: string; // APAR ID
   fullName: string;
   email: string;
-  className: string;
+  className: string; // Class/Year of Study
   registeredAt: string;
   score: number;
   mobile: string;
-  address: string;
-  dob?: string;
-  gender?: string;
-  course?: string;
-  department?: string;
-  yearSemester?: string;
-  guardianName?: string;
-  guardianMobile?: string;
-  emergencyContact?: string;
-  bloodGroup?: string;
-  photoUrl?: string;
+  schoolName: string;
+  fatherName: string;
+  hearAbout: string;
+  hearOther?: string;
 }
 
 function StudentPortalContent() {
@@ -61,41 +56,30 @@ function StudentPortalContent() {
 
   // Active view: 'login' | 'register' | 'dashboard'
   const [activeTab, setActiveTab] = useState<"login" | "register" | "dashboard">("login");
-
+  
   // Dashboard view tab state: 'subjects' | 'scores' | 'certificate' | 'edit-profile'
   const [dashboardTab, setDashboardTab] = useState<"subjects" | "scores" | "certificate" | "edit-profile">("subjects");
 
   // Registration Form States
   const [regName, setRegName] = useState("");
-  const [regStudentId, setRegStudentId] = useState("");
-  const [regAddress, setRegAddress] = useState("");
+  const [regSchool, setRegSchool] = useState("");
+  const [regAparId, setRegAparId] = useState("");
+  const [regFatherName, setRegFatherName] = useState("");
+  const [regClassStudy, setRegClassStudy] = useState("Class 10");
+  const [regHearAbout, setRegHearAbout] = useState("Social Media");
+  const [regHearOther, setRegHearOther] = useState("");
   const [regMobile, setRegMobile] = useState("");
   const [regEmail, setRegEmail] = useState("");
-  const [regDob, setRegDob] = useState("");
-  const [regGender, setRegGender] = useState("Male");
-  const [regCourse, setRegCourse] = useState("Sanskrit Skill Development (IGO Season 4)");
-  const [regDepartment, setRegDepartment] = useState("Sanskrit Linguistics & Skill Dev");
-  const [regYearSemester, setRegYearSemester] = useState("IGO Season 4 (Undergraduate)");
-  const [regGuardianName, setRegGuardianName] = useState("");
-  const [regGuardianMobile, setRegGuardianMobile] = useState("");
-  const [regEmergencyContact, setRegEmergencyContact] = useState("");
-  const [regBloodGroup, setRegBloodGroup] = useState("");
   const [regPassword, setRegPassword] = useState("");
-  const [photoFileName, setPhotoFileName] = useState("");
 
   // Edit Profile Form States
   const [editName, setEditName] = useState("");
+  const [editSchool, setEditSchool] = useState("");
+  const [editFatherName, setEditFatherName] = useState("");
+  const [editClassStudy, setEditClassStudy] = useState("");
+  const [editHearAbout, setEditHearAbout] = useState("");
+  const [editHearOther, setEditHearOther] = useState("");
   const [editMobile, setEditMobile] = useState("");
-  const [editAddress, setEditAddress] = useState("");
-  const [editDob, setEditDob] = useState("");
-  const [editGender, setEditGender] = useState("Male");
-  const [editCourse, setEditCourse] = useState("");
-  const [editDepartment, setEditDepartment] = useState("");
-  const [editLevel, setEditLevel] = useState("");
-  const [editGuardianName, setEditGuardianName] = useState("");
-  const [editGuardianMobile, setEditGuardianMobile] = useState("");
-  const [editEmergency, setEditEmergency] = useState("");
-  const [editBloodGroup, setEditBloodGroup] = useState("");
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState("");
@@ -113,12 +97,7 @@ function StudentPortalContent() {
   // Logged-in user state
   const [currentUser, setCurrentUser] = useState<StudentUser | null>(null);
 
-  // Auto-generate standard Student ID for registration convenience
-  useEffect(() => {
-    if (!regStudentId) {
-      setRegStudentId(`CSU-${Math.floor(100000 + Math.random() * 900000)}`);
-    }
-  }, [activeTab]);
+
 
   // Read URL query params on mount
   useEffect(() => {
@@ -147,44 +126,26 @@ function StudentPortalContent() {
     if (currentUser) {
       setEditName(currentUser.fullName || "");
       setEditMobile(currentUser.mobile || "");
-      setEditAddress(currentUser.address || "");
-      setEditDob(currentUser.dob || "");
-      setEditGender(currentUser.gender || "Male");
-      setEditCourse(currentUser.course || "");
-      setEditDepartment(currentUser.department || "");
-      setEditLevel(currentUser.yearSemester || "");
-      setEditGuardianName(currentUser.guardianName || "");
-      setEditGuardianMobile(currentUser.guardianMobile || "");
-      setEditEmergency(currentUser.emergencyContact || "");
-      setEditBloodGroup(currentUser.bloodGroup || "");
+      setEditSchool(currentUser.schoolName || "");
+      setEditFatherName(currentUser.fatherName || "");
+      setEditClassStudy(currentUser.className || "");
+      setEditHearAbout(currentUser.hearAbout || "Social Media");
+      setEditHearOther(currentUser.hearOther || "");
     }
   }, [currentUser]);
-
-  // Handle Photo Upload Mock
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setPhotoFileName(e.target.files[0].name);
-    }
-  };
 
   // Reset Registration Form
   const handleResetForm = () => {
     setRegName("");
-    setRegStudentId(`CSU-${Math.floor(100000 + Math.random() * 900000)}`);
-    setRegAddress("");
+    setRegSchool("");
+    setRegAparId("");
+    setRegFatherName("");
+    setRegClassStudy("Class 10");
+    setRegHearAbout("Social Media");
+    setRegHearOther("");
     setRegMobile("");
     setRegEmail("");
-    setRegDob("");
-    setRegGender("Male");
-    setRegCourse("Sanskrit Skill Development (IGO Season 4)");
-    setRegDepartment("Sanskrit Linguistics & Skill Dev");
-    setRegYearSemester("IGO Season 4 (Undergraduate)");
-    setRegGuardianName("");
-    setRegGuardianMobile("");
-    setRegEmergencyContact("");
-    setRegBloodGroup("");
     setRegPassword("");
-    setPhotoFileName("");
     setError(null);
     setSuccess(null);
   };
@@ -203,44 +164,31 @@ function StudentPortalContent() {
 
     // Validate Mandatory Fields
     if (
-      !regName ||
-      !regStudentId ||
-      !regAddress ||
-      !regMobile ||
-      !regEmail ||
-      !regDob ||
-      !regGender ||
-      !regCourse ||
-      !regDepartment ||
-      !regYearSemester ||
-      !regGuardianName ||
-      !regGuardianMobile ||
-      !regEmergencyContact ||
+      !regName || 
+      !regSchool || 
+      !regAparId || 
+      !regFatherName || 
+      !regClassStudy || 
+      !regHearAbout || 
+      !regMobile || 
+      !regEmail || 
       !regPassword
     ) {
       setError("Please fill in all mandatory fields marked with an asterisk (*).");
       return;
     }
 
+    // Email validation format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(regEmail)) {
       setError("Please enter a valid email address.");
       return;
     }
 
+    // Mobile Number validation (simple format check)
     const mobileRegex = /^\+?[0-9\s-]{10,15}$/;
     if (!mobileRegex.test(regMobile)) {
-      setError("Please enter a valid 10-15 digit Mobile Number.");
-      return;
-    }
-
-    if (!mobileRegex.test(regGuardianMobile)) {
-      setError("Please enter a valid Parent/Guardian Mobile Number.");
-      return;
-    }
-
-    if (!mobileRegex.test(regEmergencyContact)) {
-      setError("Please enter a valid Emergency Contact Mobile Number.");
+      setError("Please enter a valid 10-15 digit Contact Number.");
       return;
     }
 
@@ -249,9 +197,10 @@ function StudentPortalContent() {
       return;
     }
 
+    // Check if user already exists
     const existingUsersRaw = localStorage.getItem("registered_students");
     const existingUsers: StudentUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
-
+    
     if (existingUsers.some(u => u.email.toLowerCase() === regEmail.toLowerCase())) {
       setError("Email already registered. Please login instead.");
       return;
@@ -260,10 +209,10 @@ function StudentPortalContent() {
     const mockScore = Math.floor(75 + Math.random() * 24);
 
     const newUser: StudentUser = {
-      regId: regStudentId,
+      regId: regAparId,
       fullName: regName,
       email: regEmail,
-      className: "Class 10",
+      className: regClassStudy,
       registeredAt: new Date().toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -271,19 +220,13 @@ function StudentPortalContent() {
       }),
       score: mockScore,
       mobile: regMobile,
-      address: regAddress,
-      dob: regDob,
-      gender: regGender,
-      course: regCourse,
-      department: regDepartment,
-      yearSemester: regYearSemester,
-      guardianName: regGuardianName,
-      guardianMobile: regGuardianMobile,
-      emergencyContact: regEmergencyContact,
-      bloodGroup: regBloodGroup || "Not Specified",
-      photoUrl: photoFileName ? `/photos/${photoFileName}` : ""
+      schoolName: regSchool,
+      fatherName: regFatherName,
+      hearAbout: regHearAbout,
+      hearOther: regHearAbout === "Other" ? regHearOther : ""
     };
 
+    // Save to database simulation
     existingUsers.push(newUser);
     localStorage.setItem("registered_students", JSON.stringify(existingUsers));
     localStorage.setItem(`pass_${regEmail.toLowerCase()}`, regPassword);
@@ -291,7 +234,7 @@ function StudentPortalContent() {
 
     setCurrentUser(newUser);
     setSuccess("Student registration completed successfully.");
-
+    
     setTimeout(() => {
       setActiveTab("dashboard");
       setSuccess(null);
@@ -305,25 +248,20 @@ function StudentPortalContent() {
     setSuccess(null);
 
     if (
-      !editName ||
-      !editMobile ||
-      !editAddress ||
-      !editDob ||
-      !editGender ||
-      !editCourse ||
-      !editDepartment ||
-      !editLevel ||
-      !editGuardianName ||
-      !editGuardianMobile ||
-      !editEmergency
+      !editName || 
+      !editSchool || 
+      !editFatherName || 
+      !editClassStudy || 
+      !editHearAbout || 
+      !editMobile
     ) {
       setError("Please fill in all mandatory fields (*).");
       return;
     }
 
     const mobileRegex = /^\+?[0-9\s-]{10,15}$/;
-    if (!mobileRegex.test(editMobile) || !mobileRegex.test(editGuardianMobile) || !mobileRegex.test(editEmergency)) {
-      setError("Please ensure all mobile and contact numbers are in 10-15 digit format.");
+    if (!mobileRegex.test(editMobile)) {
+      setError("Please ensure Contact Number is in 10-15 digit format.");
       return;
     }
 
@@ -334,32 +272,27 @@ function StudentPortalContent() {
       ...currentUser,
       fullName: editName,
       mobile: editMobile,
-      address: editAddress,
-      dob: editDob,
-      gender: editGender,
-      course: editCourse,
-      department: editDepartment,
-      yearSemester: editLevel,
-      guardianName: editGuardianName,
-      guardianMobile: editGuardianMobile,
-      emergencyContact: editEmergency,
-      bloodGroup: editBloodGroup
+      schoolName: editSchool,
+      fatherName: editFatherName,
+      className: editClassStudy,
+      hearAbout: editHearAbout,
+      hearOther: editHearAbout === "Other" ? editHearOther : ""
     };
 
     // Update list of all registered students
     const existingUsersRaw = localStorage.getItem("registered_students");
     const existingUsers: StudentUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
-
+    
     const index = existingUsers.findIndex(u => u.regId === currentUser.regId);
     if (index !== -1) {
       existingUsers[index] = updatedUser;
     } else {
       existingUsers.push(updatedUser);
     }
-
+    
     localStorage.setItem("registered_students", JSON.stringify(existingUsers));
     localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(updatedUser));
-
+    
     setCurrentUser(updatedUser);
     setSuccess("Profile details updated successfully.");
     setTimeout(() => {
@@ -380,30 +313,22 @@ function StudentPortalContent() {
 
     const existingUsersRaw = localStorage.getItem("registered_students");
     const existingUsers: StudentUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
-
+    
     const user = existingUsers.find(u => u.email.toLowerCase() === loginEmail.toLowerCase());
     const storedPassword = localStorage.getItem(`pass_${loginEmail.toLowerCase()}`);
 
     if (loginEmail.toLowerCase() === "student@csu.edu" && loginPassword === "password") {
       const defaultUser: StudentUser = {
-        regId: "CSU-884291",
+        regId: "APAR-884291",
         fullName: "Aditya Sharma",
         email: "student@csu.edu",
         className: "Class 10",
         registeredAt: "June 25, 2026",
         score: 92,
         mobile: "+91 91777 71149",
-        address: "CSU Campus, Janakpuri, New Delhi, India",
-        dob: "2010-06-15",
-        gender: "Male",
-        course: "Sanskrit Skill Development (IGO Season 4)",
-        department: "Sanskrit Linguistics & Skill Dev",
-        yearSemester: "IGO Season 4 (Undergraduate)",
-        guardianName: "Rajesh Sharma",
-        guardianMobile: "+91 98765 43210",
-        emergencyContact: "+91 91777 71149",
-        bloodGroup: "O+",
-        photoUrl: ""
+        schoolName: "CSU Campus School, New Delhi",
+        fatherName: "Rajesh Sharma",
+        hearAbout: "Website"
       };
       localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(defaultUser));
       setCurrentUser(defaultUser);
@@ -423,7 +348,7 @@ function StudentPortalContent() {
     localStorage.setItem("sanskrit_olympiad_user", JSON.stringify(user));
     setCurrentUser(user);
     setSuccess("Logged in successfully!");
-
+    
     setTimeout(() => {
       setActiveTab("dashboard");
       setSuccess(null);
@@ -456,7 +381,7 @@ function StudentPortalContent() {
   const handlePrintCertificate = () => {
     const printContent = certificateRef.current?.outerHTML;
     if (!printContent) return;
-
+    
     const style = document.createElement("style");
     style.id = "cert-print-style";
     style.innerHTML = `
@@ -497,7 +422,6 @@ function StudentPortalContent() {
           print-color-adjust: exact !important;
           box-shadow: none !important;
         }
-        /* Ensure all colors and borders print identical to screen preview */
         #cert-print-wrapper * {
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
@@ -516,7 +440,7 @@ function StudentPortalContent() {
     document.head.appendChild(style);
 
     window.print();
-
+    
     document.body.removeChild(wrapper);
     document.head.removeChild(style);
   };
@@ -525,7 +449,7 @@ function StudentPortalContent() {
   const handlePrintMarksheet = () => {
     const printContent = marksheetRef.current?.outerHTML;
     if (!printContent) return;
-
+    
     const style = document.createElement("style");
     style.id = "marksheet-print-style";
     style.innerHTML = `
@@ -570,7 +494,7 @@ function StudentPortalContent() {
     document.head.appendChild(style);
 
     window.print();
-
+    
     document.body.removeChild(wrapper);
     document.head.removeChild(style);
   };
@@ -595,12 +519,12 @@ function StudentPortalContent() {
 
   return (
     <div className="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-sans relative">
-
+      
       {/* Recovery Modal */}
       {showForgotModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-md border border-slate-200 shadow-2xl relative">
-            <button
+            <button 
               onClick={() => { setShowForgotModal(false); setRecoverySuccess(null); }}
               className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 font-extrabold cursor-pointer"
             >
@@ -647,7 +571,7 @@ function StudentPortalContent() {
       )}
 
       <div className="max-w-7xl mx-auto">
-
+        
         {/* Header Branding */}
         {activeTab !== "dashboard" && (
           <div className="text-center mb-10">
@@ -685,17 +609,17 @@ function StudentPortalContent() {
               <h2 className="text-xl font-bold">Candidate Sign In</h2>
               <p className="text-xs text-white/80 mt-1">Access your personalized Olympiad portal</p>
             </div>
-
+            
             <div className="p-8">
               <form onSubmit={handleLogin} className="space-y-5">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
-                    Registered Email Address
+                    Registered Email Address / APAR ID
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                     <input
-                      type="email"
+                      type="text"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
                       placeholder="e.g. student@csu.edu"
@@ -768,11 +692,11 @@ function StudentPortalContent() {
         {activeTab === "register" && (
           <div className="max-w-7xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden animate-fade-in">
             <div className="grid grid-cols-1 md:grid-cols-5">
-
+              
               {/* Left Side: Brand promotion & Info */}
               <div className="md:col-span-1 bg-gradient-to-br from-[#007799] to-[#0092bc] text-white p-8 flex flex-col justify-between">
                 <div>
-                  <button
+                  <button 
                     onClick={handleCancelRegistration}
                     className="flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white mb-6"
                   >
@@ -787,7 +711,7 @@ function StudentPortalContent() {
                 <div className="space-y-4 mt-8 pt-8 border-t border-white/10 text-[11px]">
                   <div className="flex items-start gap-2.5">
                     <CheckCircle className="h-4.5 w-4.5 text-yellow-300 flex-shrink-0" />
-                    <span>Instant generation of custom Student ID.</span>
+                    <span>Instant generation of custom APAR ID.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <CheckCircle className="h-4.5 w-4.5 text-yellow-300 flex-shrink-0" />
@@ -804,319 +728,200 @@ function StudentPortalContent() {
               <div className="md:col-span-4 p-8 sm:p-10">
                 <h3 className="text-lg font-black text-slate-800 mb-6 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                   <UserCheck className="h-5 w-5 text-[#007799]" />
-                  Student Registration Form
+                  Registration Form
                 </h3>
-
+                
                 <form onSubmit={handleRegister} className="space-y-6">
-
-                  {/* Category 1: Student Information */}
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-bold text-[#007799] uppercase tracking-wider">I. Personal Profile Details</h4>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Student Name <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="text"
-                            required
-                            value={regName}
-                            onChange={(e) => setRegName(e.target.value)}
-                            placeholder="e.g. Aditya Sharma"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Student ID (Auto-Generated) <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Smartphone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="text"
-                            required
-                            value={regStudentId}
-                            onChange={(e) => setRegStudentId(e.target.value)}
-                            className="w-full bg-slate-100 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs font-bold text-slate-700 cursor-not-allowed focus:outline-none"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Date of Birth <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="date"
-                            required
-                            value={regDob}
-                            onChange={(e) => setRegDob(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Gender <span className="text-red-500">*</span>
-                        </label>
-                        <select
-                          value={regGender}
-                          onChange={(e) => setRegGender(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all cursor-pointer"
-                        >
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Blood Group <span className="text-slate-400 font-normal">(Optional)</span>
-                        </label>
-                        <select
-                          value={regBloodGroup}
-                          onChange={(e) => setRegBloodGroup(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all cursor-pointer"
-                        >
-                          <option value="">Select Blood Group</option>
-                          <option value="A+">A+</option>
-                          <option value="A-">A-</option>
-                          <option value="B+">B+</option>
-                          <option value="B-">B-</option>
-                          <option value="AB+">AB+</option>
-                          <option value="AB-">AB-</option>
-                          <option value="O+">O+</option>
-                          <option value="O-">O-</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="email"
-                            required
-                            value={regEmail}
-                            onChange={(e) => setRegEmail(e.target.value)}
-                            placeholder="e.g. aditya@mail.com"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Mobile Number <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Smartphone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="tel"
-                            required
-                            value={regMobile}
-                            onChange={(e) => setRegMobile(e.target.value)}
-                            placeholder="e.g. +91 91777 71149"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
+                  
+                  {/* General Fields */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="text"
+                          required
+                          value={regName}
+                          onChange={(e) => setRegName(e.target.value)}
+                          placeholder="Student full name"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
+                        />
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                        Address <span className="text-red-500">*</span>
+                        Father's Name <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
-                        <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                         <input
                           type="text"
                           required
-                          value={regAddress}
-                          onChange={(e) => setRegAddress(e.target.value)}
-                          placeholder="Full residential postal address"
+                          value={regFatherName}
+                          onChange={(e) => setRegFatherName(e.target.value)}
+                          placeholder="Father's full name"
                           className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
                         />
                       </div>
                     </div>
                   </div>
 
-                  {/* Category 2: Academic Program details */}
-                  <div className="space-y-4 pt-2">
-                    <h4 className="text-xs font-bold text-[#007799] uppercase tracking-wider">II. Academic Program Details</h4>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Course/Program <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <BookOpen className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
-                          <select
-                            value={regCourse}
-                            onChange={(e) => setRegCourse(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white cursor-pointer"
-                          >
-                            <option value="Sanskrit Skill Development (IGO Season 4)">Sanskrit Skill Development (IGO Season 4)</option>
-                            <option value="Innovation and Startup (Olympiad Level 1 - Class 06 to 08)">Innovation and Startup (Olympiad Level 1 - Class 06 to 08)</option>
-                            <option value="Classical Vocabulary Matching (Olympiad Level 2 - Class 09 to 12)">Classical Vocabulary Matching (Olympiad Level 2 - Class 09 to 12)</option>
-                            <option value="Phonetics & Audio Guides (Olympiad Special - PG Level)">Phonetics & Audio Guides (Olympiad Special - PG Level)</option>
-                          </select>
-                        </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        School/College Name <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <School className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="text"
+                          required
+                          value={regSchool}
+                          onChange={(e) => setRegSchool(e.target.value)}
+                          placeholder="Name of your institution"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
+                        />
                       </div>
+                    </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Department <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Building className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
-                          <select
-                            value={regDepartment}
-                            onChange={(e) => setRegDepartment(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white cursor-pointer"
-                          >
-                            <option value="Sanskrit Linguistics & Skill Dev">Sanskrit Linguistics & Skill Dev</option>
-                            <option value="Olympiad and Innovation Council">Olympiad and Innovation Council</option>
-                            <option value="Classical Languages & Literature">Classical Languages & Literature</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Olympiad Level / Level <span className="text-red-500">*</span>
-                        </label>
-                        <select
-                          value={regYearSemester}
-                          onChange={(e) => setRegYearSemester(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white cursor-pointer"
-                        >
-                          <option value="Olympiad Level 1 (Class 6 - 8)">Olympiad Level 1 (Class 6 - 8)</option>
-                          <option value="Olympiad Level 2 (Class 9 - 12)">Olympiad Level 2 (Class 9 - 12)</option>
-                          <option value="IGO Season 4 (Undergraduate)">IGO Season 4 (Undergraduate)</option>
-                          <option value="Olympiad Special (Postgraduate)">Olympiad Special (Postgraduate)</option>
-                        </select>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        APAR ID <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Smartphone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="text"
+                          required
+                          value={regAparId}
+                          onChange={(e) => setRegAparId(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs font-bold text-slate-700 focus:outline-none"
+                        />
                       </div>
                     </div>
                   </div>
 
-                  {/* Category 3: Parent & Contact Details */}
-                  <div className="space-y-4 pt-2">
-                    <h4 className="text-xs font-bold text-[#007799] uppercase tracking-wider">III. Guardianship & Emergency Contacts</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        Class/Year of Study <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={regClassStudy}
+                        onChange={(e) => setRegClassStudy(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all cursor-pointer"
+                      >
+                        <option value="Class 6">Class 6</option>
+                        <option value="Class 7">Class 7</option>
+                        <option value="Class 8">Class 8</option>
+                        <option value="Class 9">Class 9</option>
+                        <option value="Class 10">Class 10</option>
+                        <option value="Class 11">Class 11</option>
+                        <option value="Class 12">Class 12</option>
+                        <option value="Undergraduate Year 1">Undergraduate Year 1</option>
+                        <option value="Undergraduate Year 2">Undergraduate Year 2</option>
+                        <option value="Undergraduate Year 3">Undergraduate Year 3</option>
+                        <option value="Postgraduate Year 1">Postgraduate Year 1</option>
+                        <option value="Postgraduate Year 2">Postgraduate Year 2</option>
+                      </select>
+                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        Contact Number <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Smartphone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="tel"
+                          required
+                          value={regMobile}
+                          onChange={(e) => setRegMobile(e.target.value)}
+                          placeholder="e.g. +91 91777 71149"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        Email ID <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="email"
+                          required
+                          value={regEmail}
+                          onChange={(e) => setRegEmail(e.target.value)}
+                          placeholder="e.g. name@mail.com"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-50 pt-4">
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        How did you hear about us? <span className="text-red-500">*</span>
+                      </label>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {["Social Media", "School/College", "Friend/Family", "Website", "Newspaper", "Other"].map((opt) => (
+                          <label key={opt} className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer text-xs transition-all">
+                            <input
+                              type="radio"
+                              name="hearAbout"
+                              value={opt}
+                              checked={regHearAbout === opt}
+                              onChange={(e) => setRegHearAbout(e.target.value)}
+                              className="accent-[#007799]"
+                            />
+                            <span>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {regHearAbout === "Other" && (
                       <div>
                         <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Parent/Guardian Name <span className="text-red-500">*</span>
+                          Specify Other <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
-                          <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                          <HelpCircle className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
                           <input
                             type="text"
                             required
-                            value={regGuardianName}
-                            onChange={(e) => setRegGuardianName(e.target.value)}
-                            placeholder="Full name of Guardian"
+                            value={regHearOther}
+                            onChange={(e) => setRegHearOther(e.target.value)}
+                            placeholder="Please specify source"
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
                           />
                         </div>
                       </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Guardian Mobile Number <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Smartphone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="tel"
-                            required
-                            value={regGuardianMobile}
-                            onChange={(e) => setRegGuardianMobile(e.target.value)}
-                            placeholder="Guardian phone number"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Emergency Contact Mobile <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Heart className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="tel"
-                            required
-                            value={regEmergencyContact}
-                            onChange={(e) => setRegEmergencyContact(e.target.value)}
-                            placeholder="Emergency contact phone"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
-                  {/* Category 4: Security & Uploads */}
-                  <div className="space-y-4 pt-2">
-                    <h4 className="text-xs font-bold text-[#007799] uppercase tracking-wider">IV. Security Credential & Photo Upload</h4>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Set Account Password <span className="text-red-500">*</span>
-                        </label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="password"
-                            required
-                            value={regPassword}
-                            onChange={(e) => setRegPassword(e.target.value)}
-                            placeholder="Minimum 6 characters"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Profile Photo Upload
-                        </label>
-                        <div className="relative">
-                          <Upload className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handlePhotoChange}
-                            className="hidden"
-                            id="reg-photo-upload"
-                          />
-                          <label
-                            htmlFor="reg-photo-upload"
-                            className="w-full bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-600 flex items-center justify-between cursor-pointer transition-all border-dashed"
-                          >
-                            <span>{photoFileName || "Choose photo file..."}</span>
-                            <span className="bg-slate-200 text-slate-700 text-[10px] px-2.5 py-1 rounded font-bold">Browse</span>
-                          </label>
-                        </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-slate-50 pt-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                        Set Account Password <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="password"
+                          required
+                          value={regPassword}
+                          onChange={(e) => setRegPassword(e.target.value)}
+                          placeholder="Minimum 6 characters"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-[#007799] focus:bg-white transition-all"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1157,7 +962,7 @@ function StudentPortalContent() {
         {/* LOGGED IN VIEW WITH SIDEBAR PROFILE & VERTICAL TABS */}
         {activeTab === "dashboard" && currentUser && (
           <div className="space-y-6">
-
+            
             {/* Top Welcome Banner */}
             <div className="bg-gradient-to-r from-[#007799] to-[#0092bc] text-white rounded-2xl p-6 sm:p-8 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div>
@@ -1190,10 +995,10 @@ function StudentPortalContent() {
 
             {/* Main Content Layout Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-
-              {/* LEFT SIDEBAR: PROFILE & SIDE TABS (Always visible) */}
+              
+              {/* LEFT SIDEBAR: PROFILE & SIDE TABS */}
               <div className="lg:col-span-1 space-y-6">
-
+                
                 {/* Always visible student Profile card */}
                 <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                   <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
@@ -1211,29 +1016,25 @@ function StudentPortalContent() {
                   </div>
                   <ul className="space-y-3 text-xs">
                     <li className="flex justify-between py-0.5">
-                      <span className="text-slate-500 font-semibold">Mobile:</span>
+                      <span className="text-slate-500 font-semibold">Father's Name:</span>
+                      <span className="text-slate-800 font-extrabold text-right">{currentUser.fatherName}</span>
+                    </li>
+                    <li className="flex justify-between py-0.5">
+                      <span className="text-slate-500 font-semibold">School/College:</span>
+                      <span className="text-slate-800 font-extrabold text-right max-w-[180px] break-words">{currentUser.schoolName}</span>
+                    </li>
+                    <li className="flex justify-between py-0.5">
+                      <span className="text-slate-500 font-semibold">Class/Year:</span>
+                      <span className="text-slate-800 font-extrabold text-right">{currentUser.className}</span>
+                    </li>
+                    <li className="flex justify-between py-0.5">
+                      <span className="text-slate-500 font-semibold">Contact No:</span>
                       <span className="text-slate-800 font-extrabold">{currentUser.mobile}</span>
                     </li>
                     <li className="flex justify-between py-0.5">
-                      <span className="text-slate-500 font-semibold">Address:</span>
-                      <span className="text-slate-800 font-extrabold text-right max-w-[180px] break-words">{currentUser.address}</span>
-                    </li>
-                    <li className="flex justify-between py-0.5">
-                      <span className="text-slate-500 font-semibold">Email:</span>
+                      <span className="text-slate-500 font-semibold">Email ID:</span>
                       <span className="text-slate-800 font-extrabold break-all">{currentUser.email}</span>
                     </li>
-                    {currentUser.course && (
-                      <li className="flex justify-between py-0.5">
-                        <span className="text-slate-500 font-semibold">Course:</span>
-                        <span className="text-slate-800 font-extrabold text-right max-w-[180px] break-words">{currentUser.course}</span>
-                      </li>
-                    )}
-                    {currentUser.department && (
-                      <li className="flex justify-between py-0.5">
-                        <span className="text-slate-500 font-semibold">Department:</span>
-                        <span className="text-slate-800 font-extrabold text-right max-w-[180px] break-words">{currentUser.department}</span>
-                      </li>
-                    )}
                     <li className="flex justify-between py-0.5">
                       <span className="text-slate-500 font-semibold">Registered:</span>
                       <span className="text-slate-800 font-extrabold">{currentUser.registeredAt}</span>
@@ -1255,40 +1056,44 @@ function StudentPortalContent() {
                   </span>
                   <button
                     onClick={() => setDashboardTab("subjects")}
-                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${dashboardTab === "subjects"
+                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "subjects"
                         ? "bg-[#007799] text-white shadow-sm"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                      }`}
+                    }`}
                   >
                     <BookMarked className="h-4 w-4" />
                     <span>Enrolled Syllabus</span>
                   </button>
                   <button
                     onClick={() => setDashboardTab("scores")}
-                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${dashboardTab === "scores"
+                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "scores"
                         ? "bg-[#007799] text-white shadow-sm"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                      }`}
+                    }`}
                   >
                     <FileSpreadsheet className="h-4 w-4" />
                     <span>Olympiad Score Card</span>
                   </button>
                   <button
                     onClick={() => setDashboardTab("certificate")}
-                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${dashboardTab === "certificate"
+                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "certificate"
                         ? "bg-[#007799] text-white shadow-sm"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                      }`}
+                    }`}
                   >
                     <Award className="h-4 w-4" />
                     <span>Download Certificate</span>
                   </button>
                   <button
                     onClick={() => setDashboardTab("edit-profile")}
-                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${dashboardTab === "edit-profile"
+                    className={`w-full py-3 px-4 text-left text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2.5 ${
+                      dashboardTab === "edit-profile"
                         ? "bg-[#007799] text-white shadow-sm"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                      }`}
+                    }`}
                   >
                     <Edit3 className="h-4 w-4" />
                     <span>Edit Profile Details</span>
@@ -1318,7 +1123,7 @@ function StudentPortalContent() {
 
               {/* RIGHT CONTENT DISPLAY AREA */}
               <div className="lg:col-span-2 space-y-6">
-
+                
                 {/* 1. Dynamic content: Enrolled Syllabus tab */}
                 {dashboardTab === "subjects" && (
                   <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm animate-fade-in">
@@ -1369,8 +1174,8 @@ function StudentPortalContent() {
                     </div>
 
                     {/* Printable marksheet area */}
-                    {/* <div ref={marksheetRef} className="bg-white p-4 border  rounded-md">
-
+                    <div ref={marksheetRef} className="bg-white p-4 border rounded-md">
+                      {/* Marksheet Print Header (styled nicely) */}
                       <div className="mb-6 border-b-2 border-slate-900 pb-4 text-center space-y-2">
                         <div className="flex justify-center items-center gap-3">
                           <img src="/navbar.png" alt="CSU Logo" className="h-12 w-auto object-contain" />
@@ -1385,31 +1190,31 @@ function StudentPortalContent() {
                           Official Evaluation Marksheet
                         </h3>
 
-
+                        {/* Student Details Grid */}
                         <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-left text-xs pt-4 text-slate-700">
                           <div>
                             <span className="font-semibold text-slate-500">Student Name:</span>{" "}
                             <strong className="text-slate-900 font-extrabold uppercase">{currentUser.fullName}</strong>
                           </div>
                           <div>
-                            <span className="font-semibold text-slate-500">Student ID / Roll No:</span>{" "}
+                            <span className="font-semibold text-slate-500">APAR ID / Roll No:</span>{" "}
                             <strong className="text-slate-900 font-extrabold">{currentUser.regId}</strong>
                           </div>
                           <div>
-                            <span className="font-semibold text-slate-500">Course & Dept:</span>{" "}
-                            <strong className="text-slate-900 font-extrabold">{currentUser.course}</strong>
+                            <span className="font-semibold text-slate-500">School/College:</span>{" "}
+                            <strong className="text-slate-900 font-extrabold">{currentUser.schoolName}</strong>
                           </div>
                           <div>
-                            <span className="font-semibold text-slate-500">Olympiad Level:</span>{" "}
-                            <strong className="text-slate-900 font-extrabold">{currentUser.yearSemester}</strong>
+                            <span className="font-semibold text-slate-500">Class/Year of Study:</span>{" "}
+                            <strong className="text-slate-900 font-extrabold">{currentUser.className}</strong>
                           </div>
                           <div>
-                            <span className="font-semibold text-slate-500">Date of Birth:</span>{" "}
-                            <strong className="text-slate-900 font-extrabold">{currentUser.dob || "N/A"}</strong>
+                            <span className="font-semibold text-slate-500">Father's Name:</span>{" "}
+                            <strong className="text-slate-900 font-extrabold">{currentUser.fatherName}</strong>
                           </div>
                           <div>
-                            <span className="font-semibold text-slate-500">Gender:</span>{" "}
-                            <strong className="text-slate-900 font-extrabold">{currentUser.gender}</strong>
+                            <span className="font-semibold text-slate-500">Contact Number:</span>{" "}
+                            <strong className="text-slate-900 font-extrabold">{currentUser.mobile}</strong>
                           </div>
                         </div>
                       </div>
@@ -1443,7 +1248,7 @@ function StudentPortalContent() {
                         </table>
                       </div>
 
-
+                      {/* Signatures & Verification Area for printing */}
                       <div className="mt-8 pt-6 border-t border-slate-200 flex justify-between items-end text-xs text-slate-600">
                         <div className="space-y-1">
                           <div>Evaluation Status: <strong className="text-emerald-700">PASSED</strong></div>
@@ -1498,7 +1303,7 @@ function StudentPortalContent() {
                           All Rights Reserved.
                         </p>
                       </div>
-                    </div> */}
+                    </div>
 
                     <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                       <div className="text-xs text-slate-500 font-semibold">
@@ -1534,7 +1339,7 @@ function StudentPortalContent() {
                       </button>
                     </div>
 
-                    {/* <div className="overflow-x-auto border border-slate-200 rounded-xl p-4 bg-slate-50 flex justify-center">
+                    <div className="overflow-x-auto border border-slate-200 rounded-xl p-4 bg-slate-50 flex justify-center">
                       <div
                         ref={certificateRef}
                         className="bg-white w-[750px] min-w-[750px] h-[500px] border-[16px] border-double border-amber-600 p-8 flex flex-col justify-between relative shadow-lg overflow-hidden select-none"
@@ -1569,7 +1374,7 @@ function StudentPortalContent() {
                             </span>
                           </div>
                           <p className="text-slate-600 text-xs leading-relaxed max-w-2xl mx-auto px-6">
-                            of <span className="font-extrabold text-slate-800">{currentUser.yearSemester || currentUser.className}</span> has successfully participated in the <span className="font-extrabold text-[#007799]">National Sanskrit Olympiad (Academic Session 2026)</span> and demonstrated excellent proficiency by attaining a score of <span className="font-black text-amber-700 text-sm">{currentUser.score}%</span>.
+                            of <span className="font-extrabold text-slate-800">{currentUser.className}</span> has successfully participated in the <span className="font-extrabold text-[#007799]">National Sanskrit Olympiad (Academic Session 2026)</span> and demonstrated excellent proficiency by attaining a score of <span className="font-black text-amber-700 text-sm">{currentUser.score}%</span>.
                           </p>
                         </div>
 
@@ -1602,7 +1407,7 @@ function StudentPortalContent() {
                         </div>
 
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 )}
 
@@ -1614,15 +1419,15 @@ function StudentPortalContent() {
                       Edit Profile Details
                     </h3>
                     <p className="text-xs text-slate-500 mb-6">
-                      Modify your registered contact, program, and emergency credentials below. Fields marked with <span className="text-red-500">*</span> are required.
+                      Modify your registered contact and academic credentials below. Fields marked with <span className="text-red-500">*</span> are required.
                     </p>
 
                     <form onSubmit={handleSaveProfile} className="space-y-5">
-
+                      
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Full Candidate Name <span className="text-red-500">*</span>
+                            Full Name <span className="text-red-500">*</span>
                           </label>
                           <input
                             type="text"
@@ -1635,7 +1440,35 @@ function StudentPortalContent() {
 
                         <div>
                           <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Candidate Mobile Number <span className="text-red-500">*</span>
+                            Father's Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={editFatherName}
+                            onChange={(e) => setEditFatherName(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                            School/College Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={editSchool}
+                            onChange={(e) => setEditSchool(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
+                            Contact Number <span className="text-red-500">*</span>
                           </label>
                           <input
                             type="tel"
@@ -1647,151 +1480,64 @@ function StudentPortalContent() {
                         </div>
                       </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                          Postal Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={editAddress}
-                          onChange={(e) => setEditAddress(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Date of Birth <span className="text-red-500">*</span>
+                            Class/Year of Study <span className="text-red-500">*</span>
                           </label>
-                          <input
-                            type="date"
-                            required
-                            value={editDob}
-                            onChange={(e) => setEditDob(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
-                          />
+                          <select
+                            value={editClassStudy}
+                            onChange={(e) => setEditClassStudy(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
+                          >
+                            <option value="Class 6">Class 6</option>
+                            <option value="Class 7">Class 7</option>
+                            <option value="Class 8">Class 8</option>
+                            <option value="Class 9">Class 9</option>
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 11">Class 11</option>
+                            <option value="Class 12">Class 12</option>
+                            <option value="Undergraduate Year 1">Undergraduate Year 1</option>
+                            <option value="Undergraduate Year 2">Undergraduate Year 2</option>
+                            <option value="Undergraduate Year 3">Undergraduate Year 3</option>
+                            <option value="Postgraduate Year 1">Postgraduate Year 1</option>
+                            <option value="Postgraduate Year 2">Postgraduate Year 2</option>
+                          </select>
                         </div>
 
                         <div>
                           <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Gender <span className="text-red-500">*</span>
+                            How did you hear about us? <span className="text-red-500">*</span>
                           </label>
                           <select
-                            value={editGender}
-                            onChange={(e) => setEditGender(e.target.value)}
+                            value={editHearAbout}
+                            onChange={(e) => setEditHearAbout(e.target.value)}
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
                           >
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="School/College">School/College</option>
+                            <option value="Friend/Family">Friend/Family</option>
+                            <option value="Website">Website</option>
+                            <option value="Newspaper">Newspaper</option>
                             <option value="Other">Other</option>
                           </select>
                         </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Blood Group
-                          </label>
-                          <input
-                            type="text"
-                            value={editBloodGroup}
-                            onChange={(e) => setEditBloodGroup(e.target.value)}
-                            placeholder="e.g. O+"
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
-                          />
-                        </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-50 pt-4">
+                      {editHearAbout === "Other" && (
                         <div>
                           <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Course/Program <span className="text-red-500">*</span>
-                          </label>
-                          <select
-                            value={editCourse}
-                            onChange={(e) => setEditCourse(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
-                          >
-                            <option value="Sanskrit Skill Development (IGO Season 4)">Sanskrit Skill Development (IGO Season 4)</option>
-                            <option value="Innovation and Startup (Olympiad Level 1 - Class 06 to 08)">Innovation and Startup (Olympiad Level 1 - Class 06 to 08)</option>
-                            <option value="Classical Vocabulary Matching (Olympiad Level 2 - Class 09 to 12)">Classical Vocabulary Matching (Olympiad Level 2 - Class 09 to 12)</option>
-                            <option value="Phonetics & Audio Guides (Olympiad Special - PG Level)">Phonetics & Audio Guides (Olympiad Special - PG Level)</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Department <span className="text-red-500">*</span>
-                          </label>
-                          <select
-                            value={editDepartment}
-                            onChange={(e) => setEditDepartment(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
-                          >
-                            <option value="Sanskrit Linguistics & Skill Dev">Sanskrit Linguistics & Skill Dev</option>
-                            <option value="Olympiad and Innovation Council">Olympiad and Innovation Council</option>
-                            <option value="Classical Languages & Literature">Classical Languages & Literature</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Level <span className="text-red-500">*</span>
-                          </label>
-                          <select
-                            value={editLevel}
-                            onChange={(e) => setEditLevel(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-[#007799] cursor-pointer"
-                          >
-                            <option value="Olympiad Level 1 (Class 6 - 8)">Olympiad Level 1 (Class 6 - 8)</option>
-                            <option value="Olympiad Level 2 (Class 9 - 12)">Olympiad Level 2 (Class 9 - 12)</option>
-                            <option value="IGO Season 4 (Undergraduate)">IGO Season 4 (Undergraduate)</option>
-                            <option value="Olympiad Special (Postgraduate)">Olympiad Special (Postgraduate)</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-50 pt-4">
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Parent/Guardian Name <span className="text-red-500">*</span>
+                            Specify Other <span className="text-red-500">*</span>
                           </label>
                           <input
                             type="text"
                             required
-                            value={editGuardianName}
-                            onChange={(e) => setEditGuardianName(e.target.value)}
+                            value={editHearOther}
+                            onChange={(e) => setEditHearOther(e.target.value)}
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
                           />
                         </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Guardian Mobile <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            required
-                            value={editGuardianMobile}
-                            onChange={(e) => setEditGuardianMobile(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-600 mb-1.5">
-                            Emergency Contact Mobile <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            required
-                            value={editEmergency}
-                            onChange={(e) => setEditEmergency(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#007799]"
-                          />
-                        </div>
-                      </div>
+                      )}
 
                       <div className="pt-4 flex justify-end">
                         <button
